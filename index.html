@@ -1,0 +1,2402 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+/**
+ * FixNear Admin — Sistema de Internacionalización Integrado (Español / Inglés)
+ */
+(function() {
+  const STORAGE_KEY = 'fixnear_admin_lang';
+
+  const TRANSLATIONS = {
+    en: {
+      // Sidebar
+      'Dashboard': 'Dashboard',
+      'Trabajadores': 'Workers',
+      'Clientes': 'Clients',
+      'Solicitudes': 'Requests',
+      'Reportes': 'Reports',
+      'Reportes de clientes': 'Client reports',
+      'Reportes de trabajadores': 'Worker reports',
+      'Historial': 'Audit History',
+      'Mensajes': 'Messages',
+      'Mensajes y Chats': 'Messages & Chats',
+      'Configuración': 'Settings',
+      'Admin Panel': 'Admin Panel',
+      'Cerrar sesión': 'Sign out',
+
+      // Login
+      'Iniciar sesión': 'Sign in',
+      'Solo para administradores autorizados': 'Authorized administrators only',
+      'Correo electrónico': 'Email address',
+      'Contraseña': 'Password',
+      'Entrar al panel': 'Enter panel',
+      'Verificando…': 'Verifying…',
+      'Correo o contraseña incorrectos.': 'Incorrect email or password.',
+      'Esta cuenta no tiene permisos de administrador.': 'This account does not have administrator privileges.',
+
+      // Topbar & Subtitles
+      'Resumen general del sistema': 'System overview and analytics',
+      'Gestiona los perfiles de trabajadores': 'Manage worker profiles and approvals',
+      'Supervisa los clientes registrados': 'Monitor registered client accounts',
+      'Supervisa solicitudes de servicio, evidencias y fotos del problema': 'Inspect service requests, problem descriptions and photo evidence',
+      'Gestiona reportes y denuncias': 'Review disputes and moderation reports',
+      'Reportes enviados por clientes sobre trabajadores': 'Reports submitted by clients against workers',
+      'Reportes enviados por trabajadores sobre clientes': 'Reports submitted by workers against clients',
+      'Registro de cambios y auditoría': 'System activity and audit log',
+      'Avisos del administrador y conversaciones con fotos entre usuarios': 'Admin announcements and user chat inspection with photos',
+      'Comunicación con usuarios': 'User communication',
+      'Ajustes generales del sistema': 'General system and platform settings',
+
+      // Dashboard Stats & Charts
+      'Trabajadores totales': 'Total workers',
+      'Pendientes aprobación': 'Pending approval',
+      'Clientes registrados': 'Registered clients',
+      'Total solicitudes': 'Total requests',
+      'Reportes pendientes': 'Pending reports',
+      'Tasa de aprobación': 'Approval rate',
+      'Mensajes enviados': 'Sent messages',
+      'Mes actual': 'Current month',
+      'Mes anterior': 'Previous month',
+      'Mes siguiente': 'Next month',
+      'Registros por mes': 'Sign-ups per month',
+      'Estado de trabajadores': 'Worker status',
+      'Top 5 oficios': 'Top 5 trades',
+      'Actividad por día': 'Activity per day',
+      'Aprobados': 'Approved',
+      'Pendientes': 'Pending',
+      'Rechazados': 'Rejected',
+      'Cantidad': 'Count',
+      'Registros': 'Sign-ups',
+      'Acciones admin': 'Admin actions',
+
+      // Filters
+      'Todos': 'All',
+      'Todas': 'All',
+      'En revisión': 'In review',
+      'Resueltos': 'Resolved',
+      '📷 Con fotos': '📷 With photos',
+      'Aceptadas': 'Accepted',
+      'Finalizadas': 'Completed',
+      'Canceladas': 'Cancelled',
+      '📢 Avisos del Admin': '📢 Admin Announcements',
+      '💬 Conversaciones y Fotos entre Usuarios': '💬 User Chats & Photos',
+
+      // Placeholders
+      '🔍 Buscar trabajador...': '🔍 Search worker...',
+      '🔍 Buscar cliente...': '🔍 Search client...',
+      '🔍 Buscar por cliente, trabajador o problema...': '🔍 Search by client, worker or problem...',
+      '🔍 Buscar reporte...': '🔍 Search report...',
+      '🔍 Buscar chat por usuario o mensaje...': '🔍 Search chat by user or message...',
+      'Buscar historial...': 'Search history...',
+      'Asunto del mensaje…': 'Message subject…',
+      'Escribe tu mensaje aquí…': 'Type your message here…',
+
+      // Tables
+      'Nombre': 'Name',
+      'Servicios solicitados': 'Requested services',
+      'Motivo': 'Reason',
+      'Cliente que reporta': 'Reporting client',
+      'Trabajador reportado': 'Reported worker',
+      'Trabajador que reporta': 'Reporting worker',
+      'Cliente reportado': 'Reported client',
+      'Fecha': 'Date',
+      'Fecha y Hora': 'Date & Time',
+      'Estado': 'Status',
+      'Acciones': 'Actions',
+      'Cliente': 'Client',
+      'Técnico / Trabajador': 'Technician / Worker',
+      'Problema / Título': 'Problem / Title',
+      'Fotos / Evidencias': 'Photos / Evidence',
+      'Participantes': 'Participants',
+      'Último mensaje': 'Last message',
+      'Destinatario': 'Recipient',
+      'Asunto': 'Subject',
+      'Mensaje': 'Message',
+
+      // Buttons
+      'Ver detalle': 'View details',
+      'Ver chat y fotos': 'View chat & photos',
+      'Ver': 'View',
+      'Eliminar': 'Delete',
+      'Enviar mensaje': 'Send message',
+      'Guardar cambios': 'Save changes',
+      'Cancelar': 'Cancel',
+      'Cerrar': 'Close',
+      'Abrir imagen original': 'Open original image',
+      'Exportar CSV': 'Export CSV',
+      'Guardar configuración': 'Save settings',
+      'Aprobar': 'Approve',
+      'Rechazar': 'Reject',
+      'Editar': 'Edit',
+      'Suspender': 'Suspend',
+      'Activar': 'Activate',
+
+      // Forms & Settings
+      'Enviar nuevo mensaje': 'Send new message',
+      'Selecciona destinatario…': 'Select recipient…',
+      'Anuncio a todos': 'Announcement to all',
+      'Solo trabajadores': 'Workers only',
+      'Solo clientes': 'Clients only',
+      'Usuario específico': 'Specific user',
+      'Email del usuario': 'User email',
+      'Configuración de precios y comisiones': 'Pricing & commission settings',
+      'Comisión por servicio (%)': 'Service commission (%)',
+      'Precio mínimo por hora ($)': 'Minimum hourly rate ($)',
+      'Precio máximo por hora ($)': 'Maximum hourly rate ($)',
+      'Categorías de oficios': 'Trade categories',
+      'Agregar oficio': 'Add trade',
+      'Seguridad y exportación': 'Security & export',
+      'Habilitar autenticación de 2 factores': 'Enable two-factor authentication',
+      'Editar trabajador': 'Edit worker',
+      'Apellido': 'Last name',
+      'Oficio': 'Trade',
+      'Precio por hora ($)': 'Hourly rate ($)',
+      'Descripción': 'Description',
+
+      // Modals & messages
+      'Detalle': 'Details',
+      'Foto enviada': 'Submitted photo',
+      'Conversación completa': 'Full conversation',
+      'Detalle de solicitud de servicio': 'Service request details',
+      'Sin fotos': 'No photos',
+      'Sin descripción': 'No description',
+      'Cargando…': 'Loading…',
+      'Cargando trabajadores…': 'Loading workers…',
+      'Cargando solicitudes…': 'Loading requests…',
+      'Cargando conversaciones…': 'Loading conversations…',
+      'Cargando historial…': 'Loading history…',
+      'Sin mensajes enviados.': 'No sent messages.',
+      'No hay conversaciones registradas.': 'No conversations recorded.',
+      'No se encontraron solicitudes.': 'No requests found.'
+    }
+  };
+
+  const REVERSE_TRANSLATIONS = {};
+  for (const [es, en] of Object.entries(TRANSLATIONS.en)) {
+    REVERSE_TRANSLATIONS[en] = es;
+  }
+
+  let currentLang = localStorage.getItem(STORAGE_KEY) || 'es';
+
+  function tr(es, en) {
+    if (currentLang === 'en') {
+      return en || TRANSLATIONS.en[es] || es;
+    }
+    return es;
+  }
+
+  function updateLanguageButtons() {
+    const isEn = currentLang === 'en';
+
+    document.querySelectorAll('#lang-opt-es, #login-lang-opt-es').forEach(el => {
+      if (isEn) el.classList.remove('active');
+      else el.classList.add('active');
+    });
+
+    document.querySelectorAll('#lang-opt-en, #login-lang-opt-en').forEach(el => {
+      if (isEn) el.classList.add('active');
+      else el.classList.remove('active');
+    });
+  }
+
+  function translateDOM() {
+    const isEn = currentLang === 'en';
+    const dict = isEn ? TRANSLATIONS.en : REVERSE_TRANSLATIONS;
+
+    const walker = document.createTreeWalker(
+      document.body,
+      NodeFilter.SHOW_TEXT,
+      {
+        acceptNode: function(node) {
+          if (!node.nodeValue || !node.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+          const parent = node.parentElement;
+          if (!parent) return NodeFilter.FILTER_REJECT;
+          if (parent.closest('[data-i18n-skip]')) return NodeFilter.FILTER_REJECT;
+          if (parent.tagName === 'SCRIPT' || parent.tagName === 'STYLE') return NodeFilter.FILTER_REJECT;
+          return NodeFilter.FILTER_ACCEPT;
+        }
+      }
+    );
+
+    const textNodes = [];
+    while (walker.nextNode()) {
+      textNodes.push(walker.currentNode);
+    }
+
+    textNodes.forEach(node => {
+      const trimmed = node.nodeValue.trim();
+      if (dict[trimmed]) {
+        const leading = node.nodeValue.match(/^s*/)[0];
+        const trailing = node.nodeValue.match(/s*$/)[0];
+        node.nodeValue = leading + dict[trimmed] + trailing;
+      }
+    });
+
+    document.querySelectorAll('input[placeholder], textarea[placeholder]').forEach(el => {
+      if (el.closest('[data-i18n-skip]')) return;
+      const ph = el.placeholder.trim();
+      if (dict[ph]) {
+        el.placeholder = dict[ph];
+      }
+    });
+  }
+
+  function setLanguage(lang) {
+    currentLang = (lang === 'en') ? 'en' : 'es';
+    localStorage.setItem(STORAGE_KEY, currentLang);
+    document.documentElement.lang = currentLang;
+
+    updateLanguageButtons();
+    translateDOM();
+
+    window.dispatchEvent(new CustomEvent('fixnear:lang', { detail: { lang: currentLang } }));
+  }
+
+  function toggleLanguage() {
+    setLanguage(currentLang === 'es' ? 'en' : 'es');
+  }
+
+  window.I18N = {
+    get lang() { return currentLang; },
+    setLang: setLanguage,
+    toggle: toggleLanguage,
+    tr: tr
+  };
+  window.tr = tr;
+
+  function init() {
+    document.documentElement.lang = currentLang;
+    updateLanguageButtons();
+    if (currentLang === 'en') {
+      setTimeout(translateDOM, 60);
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
+<link rel="icon" href="img/Logo FixNear app Sin fondo.png" type="image/x-icon">
+<!-- Se conservan las dos rutas que estaban en el head duplicado. Revisa en la
+     consola del navegador cuál da 404 y borra esa línea. -->
+<link rel="stylesheet" href="admin.css" />
+<link rel="stylesheet" href="../creaj2026/admin.css" />
+<title>FixNear — Panel Admin</title>
+</head>
+<body>
+<div id="login-screen">
+  <div class="login-box" style="position:relative;">
+    <div class="lang-switch lang-switch-login" role="group" aria-label="Idioma / Language">
+      <button type="button" class="lang-switch-option active" id="login-lang-opt-es" onclick="window.I18N.setLang('es')">ES</button>
+      <button type="button" class="lang-switch-option" id="login-lang-opt-en" onclick="window.I18N.setLang('en')">EN</button>
+    </div>
+    <div class="login-logo">
+      <div class="login-logo-icon">
+        <img src="img/Logo FixNear app Sin fondo.png" alt="FixNear" onerror="this.src='public/Logo FixNear app Sin fondo.png'" />
+      </div>
+      <div>
+        <span>FixNear</span>
+        <small>Panel de administración</small>
+      </div>
+    </div>
+    <h2>Iniciar sesión</h2>
+    <p>Solo para administradores autorizados</p>
+    <div class="login-error" id="login-error">Correo o contraseña incorrectos.</div>
+    <div class="field">
+      <label>Correo electrónico</label>
+      <input type="email" id="email-input" placeholder="admin@fixnear.com" />
+    </div>
+    <div class="field">
+      <label>Contraseña</label>
+      <input type="password" id="pass-input" placeholder="••••••••" />
+    </div>
+    <button class="btn-primary" id="login-btn" onclick="doLogin()">Entrar al panel</button>
+  </div>
+</div>
+
+<div id="app">
+  <div class="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-logo">
+        <div class="sidebar-logo-icon"><img src="img/Logo FixNear app Sin fondo.png" alt="FixNear Logo" onerror="this.src='public/Logo FixNear app Sin fondo.png'" /></div>
+        <div>
+          <div class="sidebar-logo-text">FixNear</div>
+          <div class="sidebar-logo-sub">Admin Panel</div>
+        </div>
+      </div>
+    </div>
+    <div class="sidebar-menu">
+      <div class="sidebar-item active" onclick="switchTab('dashboard', this)">
+        <span class="sidebar-icon"></span><span>Dashboard</span>
+      </div>
+      <div class="sidebar-item" onclick="switchTab('trabajadores', this)">
+        <span class="sidebar-icon"></span><span>Trabajadores</span>
+      </div>
+      <div class="sidebar-item" onclick="switchTab('clientes', this)">
+        <span class="sidebar-icon"></span><span>Clientes</span>
+      </div>
+      <div class="sidebar-item" onclick="switchTab('solicitudes', this)">
+        <span class="sidebar-icon"></span><span>Solicitudes</span>
+      </div>
+      <div class="sidebar-item" onclick="switchTab('reportes', this)">
+        <span class="sidebar-icon"></span><span>Reportes</span>
+      </div>
+      <div class="sidebar-item" onclick="switchTab('reportesCliente', this)">
+        <span class="sidebar-icon"></span><span>Reportes de clientes</span>
+      </div>
+      <div class="sidebar-item" onclick="switchTab('reportesTrabajador', this)">
+        <span class="sidebar-icon"></span><span>Reportes de trabajadores</span>
+      </div>
+      <div class="sidebar-item" onclick="switchTab('historial', this)">
+        <span class="sidebar-icon"></span><span>Historial</span>
+      </div>
+      <div class="sidebar-item" onclick="switchTab('mensajes', this)">
+        <span class="sidebar-icon"></span><span>Mensajes y Chats</span>
+      </div>
+      <div class="sidebar-item" onclick="switchTab('configuracion', this)">
+        <span class="sidebar-icon"></span><span>Configuración</span>
+      </div>
+    </div>
+    <div class="sidebar-footer">
+      <div class="admin-info">
+        <div class="admin-avatar">A</div>
+        <div style="min-width:0">
+          <div style="font-size:11px;font-weight:600;color:var(--text)">Admin</div>
+          <div class="admin-email" id="admin-email-badge">—</div>
+        </div>
+      </div>
+      <button class="btn-logout-sidebar" onclick="doLogout()">Cerrar sesión</button>
+    </div>
+  </div>
+
+  <div class="main-container">
+    <div class="topbar">
+      <div>
+        <div class="topbar-title" id="topbar-title">Dashboard</div>
+        <div class="topbar-sub" id="topbar-sub">Resumen general del sistema</div>
+      </div>
+      <div class="topbar-actions">
+        <div class="lang-switch" role="group" aria-label="Idioma / Language">
+          <button type="button" class="lang-switch-option active" id="lang-opt-es" onclick="window.I18N.setLang('es')">ES</button>
+          <button type="button" class="lang-switch-option" id="lang-opt-en" onclick="window.I18N.setLang('en')">EN</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="content">
+
+      <div id="dashboard" class="section active">
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-label">Trabajadores totales</div>
+            <div class="stat-value accent" id="stat-workers-total">—</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Pendientes aprobación</div>
+            <div class="stat-value amber" id="stat-pending">—</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Aprobados</div>
+            <div class="stat-value success" id="stat-approved">—</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Rechazados</div>
+            <div class="stat-value danger" id="stat-rejected">—</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Clientes registrados</div>
+            <div class="stat-value accent" id="stat-clients-total">—</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Total solicitudes</div>
+            <div class="stat-value accent" id="stat-solicitudes-total">—</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Reportes pendientes</div>
+            <div class="stat-value danger" id="stat-reports-pending">—</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Tasa de aprobación</div>
+            <div class="stat-value success" id="stat-approval-rate">—</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Mensajes enviados</div>
+            <div class="stat-value purple" id="stat-messages">—</div>
+          </div>
+        </div>
+
+        <div class="chart-filtro">
+          <button type="button" class="chart-nav" id="mes-prev" title="Mes anterior">&#8249;</button>
+          <input type="month" id="filtro-mes" class="chart-mes" />
+          <button type="button" class="chart-nav" id="mes-next" title="Mes siguiente">&#8250;</button>
+          <button type="button" class="chart-hoy" id="mes-hoy">Mes actual</button>
+        </div>
+
+        <div class="charts-grid">
+          <div class="chart-card">
+            <div class="chart-title" id="titulo-registros" data-i18n-skip>Registros por mes</div>
+            <div class="chart-box"><canvas id="chartRegistros"></canvas></div>
+            <div class="chart-nota" id="nota-registros" data-i18n-skip></div>
+          </div>
+          <div class="chart-card">
+            <div class="chart-title">Estado de trabajadores</div>
+            <div class="chart-box"><canvas id="chartEstado"></canvas></div>
+          </div>
+          <div class="chart-card">
+            <div class="chart-title">Top 5 oficios</div>
+            <div class="chart-box"><canvas id="chartOficios"></canvas></div>
+          </div>
+          <div class="chart-card">
+            <div class="chart-title" id="titulo-actividad" data-i18n-skip>Actividad por día</div>
+            <div class="chart-box"><canvas id="chartActividad"></canvas></div>
+            <div class="chart-nota" id="nota-actividad" data-i18n-skip></div>
+          </div>
+        </div>
+      </div>
+
+      <div id="trabajadores" class="section">
+        <div class="filters">
+          <button class="filter-btn active" onclick="setFilterTrabajadores('todos', this)">Todos</button>
+          <button class="filter-btn" onclick="setFilterTrabajadores('pendiente', this)">Pendientes</button>
+          <button class="filter-btn" onclick="setFilterTrabajadores('aprobado', this)">Aprobados</button>
+          <button class="filter-btn" onclick="setFilterTrabajadores('rechazado', this)">Rechazados</button>
+          <input class="search-input" placeholder="🔍 Buscar trabajador..." oninput="buscarTrabajadores(this.value)" />
+        </div>
+        <div class="workers-list" id="lista-trabajadores">
+          <div class="loading"><div class="spinner"></div>Cargando trabajadores…</div>
+        </div>
+      </div>
+
+      <div id="clientes" class="section">
+        <div class="filters">
+          <input class="search-input" placeholder="🔍 Buscar cliente..." oninput="buscarClientes(this.value)" />
+        </div>
+        <div class="data-table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Nombre</th> 
+                <th>Servicios solicitados</th>
+                <th>Reportes</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="tabla-clientes">
+              <tr><td colspan="6" style="text-align:center;padding:30px;color:var(--muted)">Cargando…</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div id="solicitudes" class="section">
+        <div class="filters">
+          <button class="filter-btn active" onclick="setFilterSolicitudes('todas', this)">Todas</button>
+          <button class="filter-btn" onclick="setFilterSolicitudes('con_fotos', this)">📷 Con fotos</button>
+          <button class="filter-btn" onclick="setFilterSolicitudes('pendiente', this)">Pendientes</button>
+          <button class="filter-btn" onclick="setFilterSolicitudes('aceptada', this)">Aceptadas</button>
+          <button class="filter-btn" onclick="setFilterSolicitudes('finalizada', this)">Finalizadas</button>
+          <button class="filter-btn" onclick="setFilterSolicitudes('cancelada', this)">Canceladas</button>
+          <input class="search-input" placeholder="🔍 Buscar por cliente, trabajador o problema..." oninput="buscarSolicitudes(this.value)" />
+        </div>
+        <div class="data-table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Cliente</th>
+                <th>Técnico / Trabajador</th>
+                <th>Problema / Título</th>
+                <th>Fecha y Hora</th>
+                <th>Fotos / Evidencias</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="tabla-solicitudes">
+              <tr><td colspan="7" style="text-align:center;padding:30px;color:var(--muted)">Cargando solicitudes…</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div id="reportes" class="section">
+        <div class="filters">
+          <button class="filter-btn active" onclick="setFilterReportes('pendiente', this)">Pendientes</button>
+          <button class="filter-btn" onclick="setFilterReportes('en-revision', this)">En revisión</button>
+          <button class="filter-btn" onclick="setFilterReportes('resuelto', this)">Resueltos</button>
+          <button class="filter-btn" onclick="setFilterReportes('todos', this)">Todos</button>
+          <input class="search-input" placeholder="🔍 Buscar reporte..." oninput="buscarReportes(this.value)" />
+        </div>
+        <div class="data-table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Tipo</th>
+                <th>Reportante</th>
+                <th>Contra</th>
+                <th>Fecha</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="tabla-reportes">
+              <tr><td colspan="6" style="text-align:center;padding:30px;color:var(--muted)">Cargando…</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div id="reportesCliente" class="section">
+        <div class="filters">
+          <button class="filter-btn active" onclick="setFilterRepRol('cliente','pendiente', this)">Pendientes</button>
+          <button class="filter-btn" onclick="setFilterRepRol('cliente','en-revision', this)">En revisión</button>
+          <button class="filter-btn" onclick="setFilterRepRol('cliente','resuelto', this)">Resueltos</button>
+          <button class="filter-btn" onclick="setFilterRepRol('cliente','todos', this)">Todos</button>
+          <input class="search-input" placeholder="🔍 Buscar reporte..." oninput="buscarRepRol('cliente', this.value)" />
+        </div>
+        <div class="data-table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Motivo</th>
+                <th>Cliente que reporta</th>
+                <th>Trabajador reportado</th>
+                <th>Fecha</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="tabla-reportes-cliente">
+              <tr><td colspan="6" style="text-align:center;padding:30px;color:var(--muted)">Cargando…</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div id="reportesTrabajador" class="section">
+        <div class="filters">
+          <button class="filter-btn active" onclick="setFilterRepRol('trabajador','pendiente', this)">Pendientes</button>
+          <button class="filter-btn" onclick="setFilterRepRol('trabajador','en-revision', this)">En revisión</button>
+          <button class="filter-btn" onclick="setFilterRepRol('trabajador','resuelto', this)">Resueltos</button>
+          <button class="filter-btn" onclick="setFilterRepRol('trabajador','todos', this)">Todos</button>
+          <input class="search-input" placeholder="🔍 Buscar reporte..." oninput="buscarRepRol('trabajador', this.value)" />
+        </div>
+        <div class="data-table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Motivo</th>
+                <th>Trabajador que reporta</th>
+                <th>Cliente reportado</th>
+                <th>Fecha</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="tabla-reportes-trabajador">
+              <tr><td colspan="6" style="text-align:center;padding:30px;color:var(--muted)">Cargando…</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div id="historial" class="section">
+        <div class="filters">
+          <select class="form-select" id="filter-historial-tipo" onchange="renderHistorial()" style="width:auto;margin-right:4px;">
+            <option value="">Todos los tipos</option>
+            <option value="aprobacion">Aprobación</option>
+            <option value="rechazo">Rechazo</option>
+            <option value="edicion">Edición</option>
+            <option value="eliminacion">Eliminación</option>
+            <option value="suspension">Suspensión</option>
+            <option value="mensaje">Mensaje</option>
+            <option value="moderacion">Moderación</option>
+          </select>
+          <input type="date" class="form-input" id="filter-historial-fecha" onchange="renderHistorial()" style="width:auto;" />
+          <input class="search-input" placeholder="Buscar historial..." oninput="buscarHistorial(this.value)" />
+        </div>
+        <div id="lista-historial">
+          <div class="loading"><div class="spinner"></div>Cargando historial…</div>
+        </div>
+      </div>
+
+      <div id="mensajes" class="section">
+        <div style="display:flex;gap:10px;margin-bottom:16px;">
+          <button class="filter-btn active" id="btn-tab-msg-admin" onclick="switchSubTabMsg('admin')">📢 Avisos del Admin</button>
+          <button class="filter-btn" id="btn-tab-msg-chats" onclick="switchSubTabMsg('chats')">💬 Conversaciones y Fotos entre Usuarios</button>
+        </div>
+
+        <div id="subtab-msg-admin">
+          <div class="form-card">
+            <h3>Enviar nuevo mensaje</h3>
+            <div class="form-field">
+              <label>Destinatario</label>
+              <select id="msg-destinatario" class="form-select" onchange="toggleMsgUsuario()">
+                <option value="">Selecciona destinatario…</option>
+                <option value="todos">Anuncio a todos</option>
+                <option value="trabajadores">Solo trabajadores</option>
+                <option value="clientes">Solo clientes</option>
+                <option value="usuario">Usuario específico</option>
+              </select>
+            </div>
+            <div class="form-field" id="msg-usuario-container" style="display:none">
+              <label>Email del usuario</label>
+              <input type="email" id="msg-usuario-email" class="form-input" placeholder="correo@ejemplo.com" />
+            </div>
+            <div class="form-field">
+              <label>Asunto</label>
+              <input type="text" id="msg-asunto" class="form-input" placeholder="Asunto del mensaje…" />
+            </div>
+            <div class="form-field">
+              <label>Mensaje</label>
+              <textarea id="msg-contenido" class="form-textarea" placeholder="Escribe tu mensaje aquí…"></textarea>
+            </div>
+            <button class="btn-send" onclick="enviarMensaje()">Enviar mensaje</button>
+          </div>
+
+          <div class="data-table-wrap" style="margin-top:20px">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Destinatario</th>
+                  <th>Asunto</th>
+                  <th>Fecha</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody id="tabla-mensajes">
+                <tr><td colspan="4" style="text-align:center;padding:30px;color:var(--muted)">Sin mensajes</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div id="subtab-msg-chats" style="display:none;">
+          <div class="filters">
+            <input class="search-input" placeholder="🔍 Buscar chat por usuario o mensaje..." oninput="buscarChats(this.value)" />
+          </div>
+          <div class="data-table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Participantes</th>
+                  <th>Último mensaje</th>
+                  <th>Fecha</th>
+                  <th>Evidencias / Fotos</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody id="tabla-chats">
+                <tr><td colspan="5" style="text-align:center;padding:30px;color:var(--muted)">Cargando conversaciones…</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div id="configuracion" class="section">
+        <div class="config-section">
+          <h3>⚙️ Comisiones y precios</h3>
+          <div class="form-field">
+            <label class="edit-label">Porcentaje de comisión (%)</label>
+            <input type="number" id="config-comision" class="edit-input" value="15" min="0" max="100" />
+          </div>
+          <div class="form-field">
+            <label class="edit-label">Precio mínimo por hora ($)</label>
+            <input type="number" id="config-precio-minimo" class="edit-input" value="5" min="0" />
+          </div>
+          <div class="form-field">
+            <label class="edit-label">Precio máximo por hora ($)</label>
+            <input type="number" id="config-precio-maximo" class="edit-input" value="100" min="0" />
+          </div>
+          <button class="btn-send" onclick="guardarConfiguracion()">Guardar configuración</button>
+        </div>
+
+        <div class="config-section">
+          <h3>🔧 Servicios disponibles</h3>
+          <div id="lista-servicios" style="margin-bottom:14px">
+            <div class="config-row"><label>Electricidad</label><button class="btn-delete" onclick="removeServicio('electricidad')">Eliminar</button></div>
+            <div class="config-row"><label>Plomería</label><button class="btn-delete" onclick="removeServicio('plomeria')">Eliminar</button></div>
+            <div class="config-row"><label>Carpintería</label><button class="btn-delete" onclick="removeServicio('carpinteria')">Eliminar</button></div>
+          </div>
+          <div style="display:flex;gap:10px">
+            <input type="text" id="nuevo-servicio" class="form-input" placeholder="Nuevo servicio…" style="flex:1" />
+            <button class="btn-send" onclick="agregarServicio()">Agregar</button>
+          </div>
+        </div>
+
+        <div class="config-section">
+          <h3>🔐 Seguridad y exportación</h3>
+          <div class="config-row" style="margin-bottom:18px">
+            <input type="checkbox" id="config-2fa" />
+            <label for="config-2fa" style="font-size:13px;cursor:pointer">Habilitar autenticación de 2 factores</label>
+          </div>
+          <div class="export-btns">
+            <button class="btn-send" onclick="exportarDatos('csv')">📊 Exportar CSV</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 id="modal-name">Detalle</h3>
+      <button class="btn-close" onclick="closeModal()">✕</button>
+    </div>
+    <div id="modal-body"></div>
+    <div class="modal-actions" id="modal-actions"></div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-edit">
+  <div class="modal">
+    <div class="modal-header">
+      <h3>Editar trabajador</h3>
+      <button class="btn-close" onclick="closeEditModal()">✕</button>
+    </div>
+    <div class="edit-modal-body">
+      <label class="edit-label">Nombre</label>
+      <input type="text" id="edit-nombre" class="edit-input" />
+      <label class="edit-label">Apellido</label>
+      <input type="text" id="edit-apellido" class="edit-input" />
+      <label class="edit-label">Oficio</label>
+      <input type="text" id="edit-oficio" class="edit-input" />
+      <label class="edit-label">Precio por hora ($)</label>
+      <input type="number" id="edit-precio" class="edit-input" />
+      <label class="edit-label">Descripción</label>
+      <textarea id="edit-descripcion" class="edit-textarea"></textarea>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-approve" onclick="guardarEdicion()">Guardar cambios</button>
+      <button class="btn-reject" onclick="closeEditModal()">Cancelar</button>
+    </div>
+  </div>
+</div>
+
+<!-- Lightbox Modal de Fotos -->
+<div class="modal-overlay" id="modal-foto" onclick="if(event.target===this) cerrarFotoModal()">
+  <div class="modal" style="max-width:92vw;width:auto;text-align:center;">
+    <div class="modal-header">
+      <h3 id="modal-foto-titulo">Foto enviada</h3>
+      <button class="btn-close" onclick="cerrarFotoModal()">✕</button>
+    </div>
+    <div style="padding:16px;">
+      <img id="modal-foto-img" src="" alt="Foto en tamaño completo" />
+      <div style="margin-top:12px;">
+        <a id="modal-foto-link" href="#" target="_blank" class="btn-primary" style="display:inline-block;text-decoration:none;padding:8px 16px;font-size:13px;border-radius:6px;background:var(--accent);color:#fff;">Abrir imagen original</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal para inspección de Chat completo y fotos entre usuarios -->
+<div class="modal-overlay" id="modal-chat" onclick="if(event.target===this) cerrarChatModal()">
+  <div class="modal" style="max-width:650px;width:95%;">
+    <div class="modal-header">
+      <h3 id="modal-chat-titulo">Conversación completa</h3>
+      <button class="btn-close" onclick="cerrarChatModal()">✕</button>
+    </div>
+    <div id="modal-chat-body" style="max-height:65vh;overflow-y:auto;padding:16px;background:var(--bg);display:flex;flex-direction:column;gap:12px;">
+      <!-- Mensajes dinámicos -->
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script type="module">
+  import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
+  import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged }
+    from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
+  import { getFirestore, collection, getDocs, getDoc, doc, updateDoc, deleteDoc, setDoc, query, orderBy }
+    from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyCC6wWLvU7vzvRANwyFslm6aQlEXL5_4MM",
+    authDomain: "fixnear-af5f0.firebaseapp.com",
+    projectId: "fixnear-af5f0",
+    storageBucket: "fixnear-af5f0.firebasestorage.app",
+    messagingSenderId: "960550306965",
+    appId: "1:960550306965:web:567d2caf4c5a66d6b0879c"
+  };
+
+  const app  = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db   = getFirestore(app);
+
+  let todosWorkers = [], todosClientes = [], todosReportes = [], todosHistorial = [], todosMensajes = [];
+  let todosSolicitudes = [], filtroSolicitudes = 'todas', busqSolicitudes = '';
+  let todosChats = [], busqChats = '', subtabMsgActual = 'admin';
+
+  // Función segura de traducción multi-idioma (fallback robusto ante admin-i18n.js)
+  function tr(es, en) {
+    if (typeof window.tr === 'function') return window.tr(es, en);
+    return (window.I18N && window.I18N.lang === 'en') ? en : es;
+  }
+
+  // Resolución amigable de nombres (para clientes y técnicos en solicitudes/chats)
+  function resolverNombre(uid) {
+    if (!uid) return '—';
+    const w = todosWorkers.find(x => x.uid === uid || x.id === uid);
+    if (w) return `${w.nombre || ''} ${w.apellido || ''}`.trim() || w.oficio || w.email || 'Técnico';
+    const c = todosClientes.find(x => x.id === uid);
+    if (c) return `${c.nombre || ''} ${c.apellido || ''}`.trim() || c.email || 'Cliente';
+    return `Usuario (${uid.substring(0, 6)}…)`;
+  }
+  // Reportes por rol: cada rol tiene su propia colección en Firestore.
+  let repPorRol = { cliente: [], trabajador: [] };
+  let filtroRepRol = { cliente: 'pendiente', trabajador: 'pendiente' };
+  let busqRepRol = { cliente: '', trabajador: '' };
+  const COLECCION_REP = { cliente: 'reportesCliente', trabajador: 'reportesTrabajador' };
+  let filtroTrabajadores = 'todos', filtroClientes = 'todos', filtroReportes = 'pendiente';
+  let busqTrabajadores = '', busqClientes = '', busqReportes = '', busqHistorial = '';
+  let workerSeleccionado = null;
+  let chartInstances = {};
+
+  const COLORES_AVATAR = ['#60a5fa','#c084fc','#34d399','#fb923c','#f472b6','#a78bfa'];
+
+  // Cambia esto por tu(s) correo(s) de admin real(es) — debe ser EXACTAMENTE
+  // el mismo que usaste en firestore.rules dentro de isAdmin().
+  const CORREOS_ADMIN = ['adminfixnear@gmail.com'];
+
+  onAuthStateChanged(auth, user => {
+    if (user && !CORREOS_ADMIN.includes(user.email)) {
+      // Se logueó con éxito (es un usuario válido de la app), pero no es
+      // admin — no lo dejamos entrar al panel y cerramos su sesión aquí.
+      signOut(auth);
+      document.getElementById('login-screen').style.display = 'flex';
+      document.getElementById('app').style.display = 'none';
+      const err = document.getElementById('login-error');
+      if (err) { err.textContent = 'Esta cuenta no tiene permisos de administrador.'; err.style.display = 'block'; }
+      return;
+    }
+    if (user) {
+      document.getElementById('login-screen').style.display = 'none';
+      document.getElementById('app').style.display = 'block';
+      document.getElementById('admin-email-badge').textContent = user.email;
+      const av = document.querySelector('.admin-avatar');
+      if (av) av.textContent = user.email.charAt(0).toUpperCase();
+      cargarTodo();
+    } else {
+      document.getElementById('login-screen').style.display = 'flex';
+      document.getElementById('app').style.display = 'none';
+    }
+  });
+
+  window.doLogin = async () => {
+    const email = document.getElementById('email-input').value.trim();
+    const pass  = document.getElementById('pass-input').value;
+    const btn   = document.getElementById('login-btn');
+    const err   = document.getElementById('login-error');
+    err.style.display = 'none';
+    btn.disabled = true; btn.textContent = 'Verificando…';
+    try { await signInWithEmailAndPassword(auth, email, pass); }
+    catch (e) { err.style.display = 'block'; btn.disabled = false; btn.textContent = 'Entrar al panel'; }
+  };
+
+  window.doLogout = async () => { await signOut(auth); };
+
+  async function cargarTodo() {
+    await Promise.all([
+      cargarTrabajadores(),
+      cargarClientes(),
+      cargarSolicitudes(),
+      cargarReportes(),
+      cargarReportesPorRol(),
+      cargarHistorial(),
+      cargarMensajes(),
+      cargarChats()
+    ]);
+    actualizarDashboard();
+  }
+
+  async function cargarTrabajadores() {
+    const snap = await getDocs(collection(db, 'solicitudesTrabajador'));
+    const solicitudes = [];
+    snap.forEach(d => solicitudes.push({ id: d.id, ...d.data() }));
+    todosWorkers = await Promise.all(solicitudes.map(async (s) => {
+      let perfil = {};
+      try {
+        const uSnap = await getDoc(doc(db, 'usuarios', s.uid));
+        if (uSnap.exists()) perfil = uSnap.data();
+      } catch (e) { /* si el usuario ya no existe, seguimos solo con la solicitud */ }
+      return { ...perfil, ...s, id: s.id, uid: s.uid };
+    }));
+    renderTrabajadores();
+  }
+
+async function cargarClientes() {
+    const snap = await getDocs(collection(db, 'usuarios'));
+    todosClientes = [];
+    snap.forEach(d => { const data = d.data(); if (data.rol === 'cliente') todosClientes.push({ id: d.id, ...data }); });
+    renderClientes();
+  }
+
+  async function cargarReportes() {
+    try {
+      const snap = await getDocs(collection(db, 'reportes'));
+      todosReportes = [];
+      snap.forEach(d => todosReportes.push({ id: d.id, ...d.data() }));
+    } catch(e) { todosReportes = []; }
+    renderReportes();
+  }
+
+  // ---------- Reportes separados por rol ----------
+  async function cargarReportesPorRol() {
+    for (const rol of ['cliente', 'trabajador']) {
+      try {
+        const snap = await getDocs(collection(db, COLECCION_REP[rol]));
+        repPorRol[rol] = [];
+        snap.forEach(d => repPorRol[rol].push({ id: d.id, ...d.data() }));
+      } catch (e) {
+        console.log('No se pudieron cargar', COLECCION_REP[rol], e);
+        repPorRol[rol] = [];
+      }
+      renderRepRol(rol);
+    }
+  }
+
+  function fechaLegible(ts) {
+    const d = aFecha(ts);
+    if (!d) return '—';
+    const loc = (window.I18N?.lang === 'en') ? 'en-US' : 'es-SV';
+    return d.toLocaleDateString(loc, { day: '2-digit', month: 'short', year: 'numeric' });
+  }
+
+  function textoEstado(e) {
+    return e === 'en-revision' ? 'En revisión' : e === 'resuelto' ? 'Resuelto' : 'Pendiente';
+  }
+
+  function renderRepRol(rol) {
+    const tbodyId = rol === 'cliente' ? 'tabla-reportes-cliente' : 'tabla-reportes-trabajador';
+    const tbody = document.getElementById(tbodyId);
+    if (!tbody) return;
+
+    let lista = [...repPorRol[rol]];
+    if (filtroRepRol[rol] !== 'todos') {
+      lista = lista.filter(r => (r.estado || 'pendiente') === filtroRepRol[rol]);
+    }
+    const q = (busqRepRol[rol] || '').toLowerCase();
+    if (q) {
+      lista = lista.filter(r =>
+        (r.reportanteNombre || '').toLowerCase().includes(q) ||
+        (r.contra || '').toLowerCase().includes(q) ||
+        (r.motivo || '').toLowerCase().includes(q));
+    }
+    lista.sort((a, b) => (b.creadoEn?.seconds || 0) - (a.creadoEn?.seconds || 0));
+
+    if (lista.length === 0) {
+      tbody.innerHTML = `<tr><td colspan="6" style="text-align:center;padding:30px;color:var(--muted)">No hay reportes en esta vista.</td></tr>`;
+      return;
+    }
+
+    tbody.innerHTML = lista.map(r => `
+      <tr>
+        <td>${r.motivo || '—'}</td>
+        <td>${r.reportanteNombre || '—'}</td>
+        <td>${r.contra || '—'}</td>
+        <td style="color:var(--muted);font-size:12px">${fechaLegible(r.creadoEn)}</td>
+        <td><span class="status-badge ${r.estado || 'pendiente'}">${textoEstado(r.estado)}</span></td>
+        <td>
+          <div style="display:flex;gap:6px;flex-wrap:wrap">
+            <button class="btn-detail" onclick="verReporteRol('${rol}','${r.id}')">Ver</button>
+            <button class="btn-edit" onclick="estadoRepRol('${rol}','${r.id}','en-revision')">Revisar</button>
+            <button class="btn-approve" onclick="estadoRepRol('${rol}','${r.id}','resuelto')">Resolver</button>
+          </div>
+        </td>
+      </tr>
+    `).join('');
+  }
+
+  window.setFilterRepRol = (rol, f, btn) => {
+    filtroRepRol[rol] = f;
+    const seccion = rol === 'cliente' ? 'reportesCliente' : 'reportesTrabajador';
+    document.querySelectorAll(`#${seccion} .filter-btn`).forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderRepRol(rol);
+  };
+
+  window.buscarRepRol = (rol, v) => { busqRepRol[rol] = v; renderRepRol(rol); };
+
+  window.verReporteRol = (rol, id) => {
+    const r = repPorRol[rol].find(x => x.id === id);
+    if (!r) return;
+    const etiquetaContra = rol === 'cliente' ? 'Trabajador reportado' : 'Cliente reportado';
+    document.getElementById('modal-name').textContent = r.motivo || 'Reporte';
+    document.getElementById('modal-body').innerHTML = `
+      <div class="modal-row"><span class="lbl">Reportante</span><span class="val">${r.reportanteNombre || '—'}</span></div>
+      <div class="modal-row"><span class="lbl">Correo</span><span class="val">${r.reportanteEmail || '—'}</span></div>
+      <div class="modal-row"><span class="lbl">${etiquetaContra}</span><span class="val">${r.contra || '—'}</span></div>
+      <div class="modal-row"><span class="lbl">Fecha</span><span class="val">${fechaLegible(r.creadoEn)}</span></div>
+      <div class="modal-row"><span class="lbl">Estado</span><span class="val">${textoEstado(r.estado)}</span></div>
+      <div class="modal-row" style="flex-direction:column;align-items:stretch;gap:6px">
+        <span class="lbl">Descripción</span>
+        <span class="val" style="text-align:left;line-height:1.6">${r.descripcion || '—'}</span>
+      </div>
+      ${r.evidenciaUrl ? `
+      <div class="modal-row" style="flex-direction:column;align-items:stretch;gap:8px">
+        <span class="lbl">Evidencia</span>
+        <a href="${r.evidenciaUrl}" target="_blank" rel="noopener">
+          <img src="${r.evidenciaUrl}" style="width:100%;border-radius:10px;object-fit:cover;max-height:320px" />
+        </a>
+      </div>` : `<div class="modal-row"><span class="lbl">Evidencia</span><span class="val">Sin adjunto</span></div>`}
+      ${r.respuestaAdmin ? `<div class="modal-row"><span class="lbl">Respuesta enviada</span><span class="val">${r.respuestaAdmin}</span></div>` : ''}
+    `;
+    document.getElementById('modal-actions').innerHTML = `
+      <button class="btn-edit" onclick="responderRepRol('${rol}','${r.id}')">Responder</button>
+      <button class="btn-approve" onclick="estadoRepRol('${rol}','${r.id}','resuelto');closeModal()">Resolver</button>
+      <button class="btn-detail" onclick="closeModal()">Cerrar</button>`;
+    document.getElementById('modal').classList.add('open');
+  };
+
+  window.estadoRepRol = async (rol, id, estado) => {
+    try {
+      await updateDoc(doc(db, COLECCION_REP[rol], id), { estado });
+      const r = repPorRol[rol].find(x => x.id === id);
+      if (r) r.estado = estado;
+      renderRepRol(rol);
+      agregarHistorial('moderacion', `Cambió a "${textoEstado(estado)}" un reporte de ${rol}`, id);
+      toast('Estado actualizado');
+    } catch (e) {
+      console.error(e);
+      toast('Error: ' + e.message);
+    }
+  };
+
+  // La respuesta se guarda en el documento y el usuario la ve en su pantalla
+  // de reportes (campo respuestaAdmin).
+  window.responderRepRol = async (rol, id) => {
+    const texto = prompt('Respuesta para el usuario:');
+    if (texto === null || !texto.trim()) return;
+    try {
+      await updateDoc(doc(db, COLECCION_REP[rol], id), {
+        respuestaAdmin: texto.trim(),
+        estado: 'resuelto',
+      });
+      const r = repPorRol[rol].find(x => x.id === id);
+      if (r) { r.respuestaAdmin = texto.trim(); r.estado = 'resuelto'; }
+      renderRepRol(rol);
+      closeModal();
+      agregarHistorial('moderacion', `Respondió un reporte de ${rol}`, id);
+      toast('Respuesta enviada');
+    } catch (e) {
+      console.error(e);
+      toast('Error: ' + e.message);
+    }
+  };
+
+  async function cargarHistorial() {
+    try {
+      const snap = await getDocs(collection(db, 'historial'));
+      todosHistorial = [];
+      snap.forEach(d => todosHistorial.push({ id: d.id, ...d.data() }));
+    } catch(e) { todosHistorial = []; }
+    renderHistorial();
+  }
+
+  async function cargarMensajes() {
+    try {
+      const snap = await getDocs(collection(db, 'mensajes'));
+      todosMensajes = [];
+      snap.forEach(d => todosMensajes.push({ id: d.id, ...d.data() }));
+    } catch(e) { todosMensajes = []; }
+    renderMensajes();
+  }
+
+  function actualizarDashboard() {
+    const aprobados  = todosWorkers.filter(w => getEstado(w) === 'aprobado').length;
+    const pendientes = todosWorkers.filter(w => getEstado(w) === 'pendiente').length;
+    const rechazados = todosWorkers.filter(w => getEstado(w) === 'rechazado').length;
+    const total      = todosWorkers.length;
+    const tasa       = total > 0 ? ((aprobados / total) * 100).toFixed(1) + '%' : '0%';
+
+    document.getElementById('stat-workers-total').textContent = total;
+    document.getElementById('stat-pending').textContent       = pendientes;
+    document.getElementById('stat-approved').textContent      = aprobados;
+    document.getElementById('stat-rejected').textContent      = rechazados;
+    document.getElementById('stat-clients-total').textContent = todosClientes.length;
+    const statSol = document.getElementById('stat-solicitudes-total');
+    if (statSol) statSol.textContent = todosSolicitudes.length;
+    document.getElementById('stat-reports-pending').textContent = todosReportes.filter(r => r.estado === 'pendiente').length;
+    document.getElementById('stat-approval-rate').textContent = tasa;
+    document.getElementById('stat-messages').textContent      = todosMensajes.length;
+
+    renderCharts();
+  }
+
+  // ==================================================================
+  //  Utilidades de fecha — Firestore devuelve Timestamp, pero algunos
+  //  documentos guardan strings ("2026-08-14") o Date. Aceptamos todo.
+  // ==================================================================
+  function aFecha(v) {
+    if (!v) return null;
+    if (typeof v.toDate === 'function') { try { const d = v.toDate(); return isNaN(d) ? null : d; } catch (e) { return null; } }
+    if (v instanceof Date) return isNaN(v) ? null : v;
+    if (typeof v === 'object' && typeof v.seconds === 'number') return new Date(v.seconds * 1000);
+    if (typeof v === 'number') return new Date(v < 1e12 ? v * 1000 : v);
+    if (typeof v === 'string') {
+      const d = new Date(/^\d{4}-\d{2}-\d{2}$/.test(v) ? v + 'T12:00:00' : v);
+      return isNaN(d) ? null : d;
+    }
+    return null;
+  }
+
+  // Nombres de campo donde puede venir la fecha de creación, en orden de
+  // preferencia. Si en la app usas otro nombre, agrégalo aquí.
+  const CAMPOS_FECHA = ['creadoEn','fechaRegistro','fechaCreacion','createdAt','fechaSolicitud',
+                        'registradoEn','fechaAlta','timestamp','fecha','actualizadoEn'];
+
+  function fechaDe(obj) {
+    if (!obj) return null;
+    for (const c of CAMPOS_FECHA) { const d = aFecha(obj[c]); if (d) return d; }
+    return null;
+  }
+
+  const claveMes = d => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`;
+  const claveDia = d => `${claveMes(d)}-${String(d.getDate()).padStart(2, '0')}`;
+
+  const MESES_ES = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+  const MESES_EN = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const DIAS_ES  = ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'];
+  const MESES_LARGOS_ES = ['Enero','Febrero','Marzo','Abril','Mayo','Junio',
+                           'Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+  const MESES_LARGOS_EN = ['January','February','March','April','May','June',
+                           'July','August','September','October','November','December'];
+
+  // Mes seleccionado en el filtro del dashboard. Arranca en el mes actual.
+  let anioSel = new Date().getFullYear();
+  let mesSel  = new Date().getMonth();
+  const DIAS_EN  = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  const esIngles = () => window.I18N?.lang === 'en';
+
+  // ---- Registros por mes: los 12 meses del año seleccionado ----
+  function datosRegistrosPorMes(anio) {
+    const meses = [];
+    for (let m = 0; m < 12; m++) {
+      meses.push({
+        clave: `${anio}-${String(m + 1).padStart(2, '0')}`,
+        etiqueta: (esIngles() ? MESES_EN : MESES_ES)[m],
+        trabajadores: 0,
+        clientes: 0
+      });
+    }
+    const idx = {};
+    meses.forEach((m, i) => idx[m.clave] = i);
+
+    let enElAnio = 0, sinFecha = 0, fueraDelAnio = 0;
+    const acumular = (lista, campo) => (lista || []).forEach(o => {
+      const d = fechaDe(o);
+      if (!d) { sinFecha++; return; }
+      const i = idx[claveMes(d)];
+      if (i === undefined) { fueraDelAnio++; return; }
+      meses[i][campo]++;
+      enElAnio++;
+    });
+    acumular(todosWorkers, 'trabajadores');
+    acumular(todosClientes, 'clientes');
+    return { meses, enElAnio, sinFecha, fueraDelAnio };
+  }
+
+  // ---- Actividad: todos los días del mes seleccionado ----
+  function datosActividad(anio, mes) {
+    const totalDias = new Date(anio, mes + 1, 0).getDate();   // día 0 del mes siguiente
+    const dias = [];
+    for (let n = 1; n <= totalDias; n++) {
+      const d = new Date(anio, mes, n);
+      dias.push({ clave: claveDia(d), fecha: d, registros: 0, reportes: 0, acciones: 0 });
+    }
+    const idx = {};
+    dias.forEach((d, i) => idx[d.clave] = i);
+
+    let total = 0;
+    const acumular = (lista, campo) => (lista || []).forEach(o => {
+      const d = fechaDe(o);
+      if (!d) return;
+      const i = idx[claveDia(d)];
+      if (i !== undefined) { dias[i][campo]++; total++; }
+    });
+    acumular(todosWorkers, 'registros');
+    acumular(todosClientes, 'registros');
+    acumular(todosReportes, 'reportes');
+    acumular(repPorRol.cliente, 'reportes');
+    acumular(repPorRol.trabajador, 'reportes');
+    acumular(todosHistorial, 'acciones');
+    acumular(todosMensajes, 'acciones');
+    return { dias, total };
+  }
+
+  // ---- Controles del filtro de mes ----
+  const claveMesSel = () => `${anioSel}-${String(mesSel + 1).padStart(2, '0')}`;
+
+  function sincronizarFiltro() {
+    const input = document.getElementById('filtro-mes');
+    if (input) input.value = claveMesSel();
+    // No tiene sentido navegar a meses que todavía no ocurren.
+    const hoy = new Date();
+    const esFuturo = anioSel > hoy.getFullYear() ||
+                     (anioSel === hoy.getFullYear() && mesSel >= hoy.getMonth());
+    const next = document.getElementById('mes-next');
+    if (next) next.disabled = esFuturo;
+  }
+
+  function irAMes(anio, mes) {
+    anioSel = anio;
+    mesSel = mes;
+    sincronizarFiltro();
+    renderCharts();
+  }
+
+  function moverMes(delta) {
+    const d = new Date(anioSel, mesSel + delta, 1);
+    irAMes(d.getFullYear(), d.getMonth());
+  }
+
+  function iniciarFiltroMes() {
+    const input = document.getElementById('filtro-mes');
+    const prev  = document.getElementById('mes-prev');
+    const next  = document.getElementById('mes-next');
+    const hoyBtn = document.getElementById('mes-hoy');
+
+    if (input) input.addEventListener('change', () => {
+      const [a, m] = (input.value || '').split('-');
+      if (!a || !m) return;
+      irAMes(parseInt(a, 10), parseInt(m, 10) - 1);
+    });
+    if (prev) prev.addEventListener('click', () => moverMes(-1));
+    if (next) next.addEventListener('click', () => moverMes(1));
+    if (hoyBtn) hoyBtn.addEventListener('click', () => {
+      const h = new Date();
+      irAMes(h.getFullYear(), h.getMonth());
+    });
+
+    sincronizarFiltro();
+  }
+
+  // Se llama aquí, al final del módulo, y no antes: sincronizarFiltro() usa
+  // claveMesSel, que es una const declarada más arriba en este mismo bloque.
+  // Invocarla antes de esa línea lanza ReferenceError por la zona muerta
+  // temporal y eso aborta el módulo entero, dejando el panel sin listeners.
+  iniciarFiltroMes();
+
+  function nota(id, texto) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.textContent = texto || '';
+    el.style.display = texto ? 'block' : 'none';
+  }
+
+  function renderCharts() {
+    const ejes = {
+      x: { ticks: { color: '#777' }, grid: { color: '#2a2a2a' } },
+      y: { ticks: { color: '#777', precision: 0 }, grid: { color: '#2a2a2a' }, beginAtZero: true }
+    };
+
+    // ------------------------------- Registros por mes (año seleccionado)
+    const reg = datosRegistrosPorMes(anioSel);
+    const tituloReg = document.getElementById('titulo-registros');
+    if (tituloReg) tituloReg.textContent = tr('Registros por mes', 'Sign-ups per month') + ' · ' + anioSel;
+    if (chartInstances.registros) chartInstances.registros.destroy();
+    chartInstances.registros = new Chart(document.getElementById('chartRegistros'), {
+      type: 'line',
+      data: {
+        labels: reg.meses.map(m => m.etiqueta),
+        datasets: [
+          {
+            label: tr('Trabajadores', 'Workers'),
+            data: reg.meses.map(m => m.trabajadores),
+            borderColor: '#3b82f6', backgroundColor: 'rgba(59,130,246,0.12)',
+            borderWidth: 2, fill: true, tension: 0.4, pointRadius: 3
+          },
+          {
+            label: tr('Clientes', 'Clients'),
+            data: reg.meses.map(m => m.clientes),
+            borderColor: '#a855f7', backgroundColor: 'rgba(168,85,247,0.10)',
+            borderWidth: 2, fill: true, tension: 0.4, pointRadius: 3
+          }
+        ]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        interaction: { mode: 'index', intersect: false },
+        plugins: { legend: { labels: { color: '#777', boxWidth: 12, font: { size: 11 } } } },
+        scales: ejes
+      }
+    });
+
+    const avisos = [];
+    if (reg.sinFecha > 0 && reg.enElAnio === 0 && reg.fueraDelAnio === 0) {
+      avisos.push(tr(
+        'Ningún documento tiene fecha de registro guardada. Agrega un campo creadoEn al crear usuarios y solicitudes para que esta gráfica se llene.',
+        'No document has a stored creation date. Add a creadoEn field when creating users and applications so this chart can fill in.'));
+    } else {
+      if (reg.sinFecha > 0) avisos.push(tr(
+        `${reg.sinFecha} registro(s) sin fecha no aparecen en la gráfica.`,
+        `${reg.sinFecha} record(s) without a date are not shown.`));
+      if (reg.fueraDelAnio > 0) avisos.push(tr(
+        `${reg.fueraDelAnio} registro(s) de otros años.`,
+        `${reg.fueraDelAnio} record(s) from other years.`));
+    }
+    nota('nota-registros', avisos.join(' '));
+
+    // ------------------------------- Estado de trabajadores
+    if (chartInstances.estado) chartInstances.estado.destroy();
+    chartInstances.estado = new Chart(document.getElementById('chartEstado'), {
+      type: 'doughnut',
+      data: {
+        labels: [tr('Aprobados', 'Approved'), tr('Pendientes', 'Pending'), tr('Rechazados', 'Rejected')],
+        datasets: [{
+          data: [
+            todosWorkers.filter(w => getEstado(w) === 'aprobado').length,
+            todosWorkers.filter(w => getEstado(w) === 'pendiente').length,
+            todosWorkers.filter(w => getEstado(w) === 'rechazado').length
+          ],
+          backgroundColor: ['#22c55e', '#f59e0b', '#ef4444'], borderWidth: 0
+        }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { labels: { color: '#777', boxWidth: 12, font: { size: 11 } } } }
+      }
+    });
+
+    // ------------------------------- Top 5 oficios
+    if (chartInstances.oficios) chartInstances.oficios.destroy();
+    const oficiosMap = {};
+    todosWorkers.forEach(w => { if (w.oficio) oficiosMap[w.oficio] = (oficiosMap[w.oficio] || 0) + 1; });
+    const top5 = Object.entries(oficiosMap).sort((a, b) => b[1] - a[1]).slice(0, 5);
+    chartInstances.oficios = new Chart(document.getElementById('chartOficios'), {
+      type: 'bar',
+      data: {
+        labels: top5.map(o => o[0]),
+        datasets: [{ label: tr('Cantidad', 'Count'), data: top5.map(o => o[1]), backgroundColor: '#3b82f6', borderRadius: 4 }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false, indexAxis: 'y',
+        plugins: { legend: { display: false } },
+        scales: { x: { ...ejes.y }, y: { ...ejes.x } }
+      }
+    });
+
+    // ------------------------------- Actividad por día (mes seleccionado)
+    const act = datosActividad(anioSel, mesSel);
+    const nombreMes = (esIngles() ? MESES_LARGOS_EN : MESES_LARGOS_ES)[mesSel];
+    const tituloAct = document.getElementById('titulo-actividad');
+    if (tituloAct) tituloAct.textContent =
+      tr('Actividad por día', 'Activity per day') + ' · ' + nombreMes + ' ' + anioSel;
+    if (chartInstances.actividad) chartInstances.actividad.destroy();
+    chartInstances.actividad = new Chart(document.getElementById('chartActividad'), {
+      type: 'bar',
+      data: {
+        labels: act.dias.map(d => String(d.fecha.getDate())),
+        datasets: [
+          { label: tr('Registros', 'Sign-ups'), data: act.dias.map(d => d.registros), backgroundColor: '#3b82f6', borderRadius: 4 },
+          { label: tr('Reportes', 'Reports'),   data: act.dias.map(d => d.reportes),  backgroundColor: '#ef4444', borderRadius: 4 },
+          { label: tr('Acciones admin', 'Admin actions'), data: act.dias.map(d => d.acciones), backgroundColor: '#a855f7', borderRadius: 4 }
+        ]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: {
+          legend: { labels: { color: '#777', boxWidth: 12, font: { size: 11 } } },
+          tooltip: { callbacks: { title: (items) => {
+            const d = act.dias[items[0].dataIndex].fecha;
+            return `${(esIngles() ? DIAS_EN : DIAS_ES)[d.getDay()]} ${d.getDate()} ${nombreMes}`;
+          } } }
+        },
+        scales: {
+          x: { ...ejes.x, stacked: true,
+               ticks: { color: '#777', autoSkip: false, maxRotation: 0, minRotation: 0, font: { size: 9 } } },
+          y: { ...ejes.y, stacked: true }
+        }
+      }
+    });
+
+    nota('nota-actividad', act.total === 0
+      ? tr(`Sin actividad registrada en ${nombreMes} ${anioSel}.`,
+           `No activity recorded in ${nombreMes} ${anioSel}.`)
+      : '');
+  }
+
+  // Al cambiar de idioma hay que volver a dibujar: las etiquetas de Chart.js
+  // se pintan en el canvas y el traductor del DOM no las alcanza.
+  window.addEventListener('fixnear:lang', () => {
+    if (chartInstances.registros) renderCharts();
+    const activeSection = document.querySelector('.section.active');
+    if (activeSection) {
+      const tab = activeSection.id;
+      const isEn = window.I18N?.lang === 'en';
+      const [title, sub] = (isEn ? TAB_TITLES_EN[tab] : TAB_TITLES[tab]) || TAB_TITLES[tab] || ['', ''];
+      document.getElementById('topbar-title').textContent = title;
+      document.getElementById('topbar-sub').textContent = sub;
+    }
+  });
+
+  function getEstado(w) {
+    return w.estado || 'pendiente';
+  }
+
+  function renderTrabajadores() {
+    let workers = [...todosWorkers];
+    if (filtroTrabajadores !== 'todos') workers = workers.filter(w => getEstado(w) === filtroTrabajadores);
+    if (busqTrabajadores) {
+      const q = busqTrabajadores.toLowerCase();
+      workers = workers.filter(w => (w.nombre||'').toLowerCase().includes(q) || (w.apellido||'').toLowerCase().includes(q) || (w.oficio||'').toLowerCase().includes(q));
+    }
+
+    const list = document.getElementById('lista-trabajadores');
+
+    if (workers.length === 0) {
+      list.innerHTML = `<div class="empty-state"><div class="icon">🔍</div>No se encontraron trabajadores.</div>`;
+      return;
+    }
+
+    list.innerHTML = workers.map((w, i) => {
+      const estado  = getEstado(w);
+      const nombre  = `${w.nombre||''} ${w.apellido||''}`.trim() || 'Sin nombre';
+      const inicial = nombre.charAt(0).toUpperCase();
+      const color   = COLORES_AVATAR[i % COLORES_AVATAR.length];
+      const tags    = (w.servicios || []).slice(0, 3);
+
+      const badgeText = estado === 'pendiente' ? 'Pendiente' : estado === 'aprobado' ? 'Aprobado' : 'Rechazado';
+
+      const btns = estado === 'pendiente'
+        ? `<button class="btn-approve" onclick="aprobar('${w.id}')">Aprobar</button>
+            <button class="btn-reject"  onclick="rechazar('${w.id}')">Rechazar</button>`
+        : '';
+
+      return `
+        <div class="worker-card" id="card-${w.id}">
+          <div class="worker-avatar" style="background:${color}22;color:${color}">${inicial}</div>
+          <div class="worker-info">
+            <div class="worker-name">${nombre}</div>
+            <div class="worker-meta">
+              <span> ${w.oficio||'—'}</span>
+              <span> ${w.departamento||'—'}</span>
+              <span>⏱ ${w.experiencia||'—'} años</span>
+              <span> $${w.precioPorHora||'—'}/h</span>
+            </div>
+            <div class="worker-tags">
+              ${tags.map(t=>`<span class="tag">${t}</span>`).join('')}
+              ${(w.servicios||[]).length > 3 ? `<span class="tag">+${(w.servicios||[]).length - 3}</span>` : ''}
+            </div>
+          </div>
+          <span class="status-badge ${estado}">${badgeText}</span>
+          <div class="worker-actions">
+            ${btns}
+            ${estado === 'aprobado' ? `<button class="btn-purple" onclick="resincronizar('${w.id}')">Re-sincronizar</button>` : ''}
+            <button class="btn-edit"   onclick="editarTrabajador('${w.id}')">Editar</button>
+            <button class="btn-detail" onclick="verDetalleTrabajador('${w.id}')">Ver más</button>
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  window.setFilterTrabajadores = (f, btn) => {
+    filtroTrabajadores = f;
+    document.querySelectorAll('#trabajadores .filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderTrabajadores();
+  };
+
+  window.buscarTrabajadores = (v) => { busqTrabajadores = v; renderTrabajadores(); };
+
+  window.verDetalleTrabajador = (uid) => {
+    const w = todosWorkers.find(x => x.id === uid); if (!w) return;
+    const nombre = `${w.nombre||''} ${w.apellido||''}`.trim();
+    document.getElementById('modal-name').textContent = nombre;
+    document.getElementById('modal-body').innerHTML = `
+      ${[['Oficio',w.oficio||'—'],['Experiencia',`${w.experiencia||'—'} años`],['Teléfono',w.telefono||'—'],['Precio/hora',`$${w.precioPorHora||'—'}`],['Departamento',w.departamento||'—'],['Municipio',w.municipio||'—'],['Radio',`${w.radio||'—'} km`],['Correo',w.email||'—'],['Estado',getEstado(w)]].map(([l,v])=>`<div class="modal-row"><span class="lbl">${l}</span><span class="val">${v}</span></div>`).join('')}
+      <div class="modal-row"><span class="lbl">Descripción</span><span class="val">${w.descripcion||'—'}</span></div>
+      <div class="modal-row"><span class="lbl">Servicios</span><div class="modal-services">${(w.servicios||[]).map(s=>`<span class="tag">${s}</span>`).join('')||'—'}</div></div>
+      ${(w.metodoPago || w.preferenciaPago?.metodo) ? `
+      <div class="modal-row" style="flex-direction:column;align-items:stretch;gap:6px">
+        <span class="lbl">Preferencia de pago</span>
+        <span class="val">${(w.metodoPago || w.preferenciaPago?.metodo) === 'efectivo' ? '💵 Pago en efectivo' : '🏦 Transferencia bancaria'}</span>
+        ${(w.metodoPago || w.preferenciaPago?.metodo) === 'transferencia' ? `
+          <div style="font-size:12px;color:var(--muted);line-height:1.8;background:rgba(255,255,255,0.03);border-radius:8px;padding:10px 12px">
+            <div>Titular: <strong style="color:var(--text)">${(w.datosBancarios||w.preferenciaPago||{}).titular||'—'}</strong></div>
+            <div>Titularidad: <strong style="color:${(w.datosBancarios||w.preferenciaPago||{}).titularidad === 'terceros' ? '#f59e0b' : 'var(--text)'}">${(w.datosBancarios||w.preferenciaPago||{}).titularidad === 'terceros' ? 'Cuenta de terceros' : 'Cuenta propia'}</strong></div>
+            <div>Banco: <strong style="color:var(--text)">${(w.datosBancarios||w.preferenciaPago||{}).banco||'—'}</strong></div>
+            <div>Tipo de cuenta: <strong style="color:var(--text)">${(w.datosBancarios||w.preferenciaPago||{}).tipoCuenta === 'corriente' ? 'Corriente' : 'Ahorro'}</strong></div>
+            <div>N.º de cuenta: <strong style="color:var(--text)">${(w.datosBancarios||w.preferenciaPago||{}).numeroCuenta||'—'}</strong></div>
+          </div>` : ''}
+      </div>` : `<div class="modal-row"><span class="lbl">Preferencia de pago</span><span class="val">No registrada</span></div>`}
+      ${(w.duiFrenteUrl || w.duiReversoUrl || w.rostroUrl || w.antecedentesPenalesUrl) ? `
+      <div class="modal-row" style="flex-direction:column;align-items:stretch;gap:10px">
+        <span class="lbl">Verificación de identidad</span>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px">
+          ${w.duiFrenteUrl ? `<div><div style="font-size:11px;color:var(--muted);margin-bottom:4px">DUI frente</div><img src="${w.duiFrenteUrl}" style="width:100%;border-radius:8px;object-fit:cover" /></div>` : ''}
+          ${w.duiReversoUrl ? `<div><div style="font-size:11px;color:var(--muted);margin-bottom:4px">DUI reverso</div><img src="${w.duiReversoUrl}" style="width:100%;border-radius:8px;object-fit:cover" /></div>` : ''}
+          ${w.rostroUrl ? `<div><div style="font-size:11px;color:var(--muted);margin-bottom:4px">Rostro</div><img src="${w.rostroUrl}" style="width:100%;border-radius:8px;object-fit:cover" /></div>` : ''}
+        </div>
+        ${w.antecedentesPenalesUrl ? `
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;background:rgba(255,255,255,0.03);border-radius:8px;padding:10px 12px">
+          <a href="${w.antecedentesPenalesUrl}" target="_blank" rel="noopener noreferrer" style="color:var(--text);text-decoration:underline;display:flex;align-items:center;gap:6px">📄 Ver antecedentes penales (PDF)</a>
+          <label style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted);cursor:pointer;white-space:nowrap">
+            <input type="checkbox" ${w.antecedentesRevisado ? 'checked' : ''} onchange="toggleAntecedentesRevisado('${w.id}', this.checked)" />
+            Revisado
+          </label>
+        </div>` : `<div style="font-size:12px;color:#f59e0b">⚠ No subió antecedentes penales</div>`}
+      </div>` : `<div class="modal-row"><span class="lbl">Verificación de identidad</span><span class="val">Sin documentos subidos</span></div>`}
+    `;
+    const est = getEstado(w);
+    document.getElementById('modal-actions').innerHTML = est === 'pendiente'
+      ? `<button class="btn-approve" onclick="aprobar('${w.id}')">Aprobar</button><button class="btn-reject" onclick="rechazar('${w.id}');closeModal()">Rechazar</button>`
+      : `<button class="btn-detail" onclick="closeModal()">Cerrar</button>`;
+    document.getElementById('modal').classList.add('open');
+  };
+
+  // Marca/desmarca los antecedentes penales de una solicitud como revisados
+  // por el admin. No cambia el estado general de la solicitud (pendiente/
+  // aprobado/rechazado), es solo una bandera de control interno.
+  window.toggleAntecedentesRevisado = async (id, revisado) => {
+    const w = todosWorkers.find(x => x.id === id);
+    if (!w) return;
+    try {
+      await updateDoc(doc(db, 'solicitudesTrabajador', id), { antecedentesRevisado: revisado });
+      w.antecedentesRevisado = revisado;
+      toast(revisado ? 'Antecedentes marcados como revisados' : 'Antecedentes marcados como pendientes de revisión');
+    } catch (e) {
+      console.error(e);
+      toast('Error al actualizar: ' + e.message);
+    }
+  };
+
+  window.editarTrabajador = (uid) => {
+    const w = todosWorkers.find(x => x.id === uid); if (!w) return;
+    workerSeleccionado = w;
+    document.getElementById('edit-nombre').value      = w.nombre || '';
+    document.getElementById('edit-apellido').value    = w.apellido || '';
+    document.getElementById('edit-oficio').value      = w.oficio || '';
+    document.getElementById('edit-precio').value      = w.precioPorHora || '';
+    document.getElementById('edit-descripcion').value = w.descripcion || '';
+    document.getElementById('modal-edit').classList.add('open');
+  };
+
+  window.guardarEdicion = async () => {
+    if (!workerSeleccionado) return;
+    const datos = {
+      nombre: document.getElementById('edit-nombre').value,
+      apellido: document.getElementById('edit-apellido').value,
+      oficio: document.getElementById('edit-oficio').value,
+      precioPorHora: parseFloat(document.getElementById('edit-precio').value),
+      descripcion: document.getElementById('edit-descripcion').value
+    };
+    await updateDoc(doc(db, 'usuarios', workerSeleccionado.uid), datos);
+    Object.assign(workerSeleccionado, datos);
+    closeEditModal();
+    renderTrabajadores();
+    agregarHistorial('edicion', `Editó perfil de ${datos.nombre} ${datos.apellido}`, workerSeleccionado.id);
+    toast('Trabajador actualizado');
+  };
+
+  window.closeEditModal = () => document.getElementById('modal-edit').classList.remove('open');
+
+  // Nota: aquí "id" es el ID del documento en solicitudesTrabajador, no el uid
+  // del usuario — son cosas distintas desde que la verificación vive en su
+  // propia colección. w.uid es el usuario al que hay que actualizar.
+  window.aprobar = async (id) => {
+    const w = todosWorkers.find(x => x.id === id);
+    if (!w) return;
+    if (getEstado(w) !== 'pendiente') { toast('Esta solicitud ya fue procesada'); return; }
+    if (!w.antecedentesPenalesUrl) {
+      toast('No se puede aprobar: el trabajador no subió antecedentes penales');
+      return;
+    }
+    if (!w.antecedentesRevisado) {
+      toast('No se puede aprobar: marca los antecedentes penales como revisados primero');
+      return;
+    }
+    await setDoc(doc(db, 'usuarios', w.uid), {
+      oficio: w.oficio, experiencia: w.experiencia, telefono: w.telefono,
+      precioPorHora: w.precioPorHora, descripcion: w.descripcion, servicios: w.servicios,
+      departamento: w.departamento, municipio: w.municipio, radio: w.radio,
+      lat: w.lat, lng: w.lng,
+      duiFrenteUrl: w.duiFrenteUrl, duiReversoUrl: w.duiReversoUrl, rostroUrl: w.rostroUrl,
+      // Solo el MÉTODO va al documento público del trabajador. Los datos
+      // bancarios se escriben aparte, en la subcolección privada (ver abajo).
+      ...(w.metodoPago ? { metodoPago: w.metodoPago } : {}),
+      rol: 'trabajador', verificado: true, registroCompletado: true,
+      disponible: true,
+      calificacion: w.calificacion ?? 0,
+      totalResenas: w.totalResenas ?? 0,
+      trabajosCompletados: w.trabajosCompletados ?? 0,
+    }, { merge: true });
+    // Datos bancarios → usuarios/{uid}/privado/pago
+    // Esta subcolección solo la pueden leer el propio trabajador y el admin.
+    await guardarPagoPrivado(w);
+
+    await updateDoc(doc(db, 'solicitudesTrabajador', id), { estado: 'aprobado' });
+    w.estado = 'aprobado';
+    renderTrabajadores(); actualizarDashboard();
+    agregarHistorial('aprobacion', `Aprobó a ${w.nombre||''} ${w.apellido||''}`, w.uid);
+    toast('Trabajador aprobado');
+    closeModal();
+  };
+
+  // Escribe los datos bancarios en la subcolección privada del trabajador.
+  // Acepta el formato nuevo (datosBancarios) y el antiguo (preferenciaPago),
+  // para que las solicitudes viejas también se migren bien al aprobar.
+  async function guardarPagoPrivado(w) {
+    const origen = w.datosBancarios || w.preferenciaPago || null;
+    if (!origen) return;
+    if ((w.metodoPago || origen.metodo) !== 'transferencia') return;
+    if (!origen.numeroCuenta) return;
+    try {
+      await setDoc(doc(db, 'usuarios', w.uid, 'privado', 'pago'), {
+        titular: origen.titular || '',
+        titularidad: origen.titularidad || '',
+        banco: origen.banco || '',
+        tipoCuenta: origen.tipoCuenta || '',
+        numeroCuenta: String(origen.numeroCuenta),
+        actualizadoEn: new Date(),
+      }, { merge: true });
+    } catch (e) {
+      console.error('No se pudieron guardar los datos bancarios privados:', e);
+      toast('Aprobado, pero falló guardar los datos bancarios: ' + e.message);
+    }
+  }
+
+  // Vuelve a copiar los datos de la solicitud al usuario SIN cambiar el estado.
+  // Sirve para trabajadores aprobados antes de que existiera un campo nuevo.
+  window.resincronizar = async (id) => {
+    const w = todosWorkers.find(x => x.id === id);
+    if (!w) return;
+    if (!confirm(`¿Re-sincronizar los datos de ${w.nombre||''} ${w.apellido||''}?\n\nSe vuelven a copiar los datos de su solicitud a su perfil. No cambia su estado.`)) return;
+    try {
+      await setDoc(doc(db, 'usuarios', w.uid), {
+        oficio: w.oficio, experiencia: w.experiencia, telefono: w.telefono,
+        precioPorHora: w.precioPorHora, descripcion: w.descripcion, servicios: w.servicios,
+        departamento: w.departamento, municipio: w.municipio, radio: w.radio,
+        lat: w.lat, lng: w.lng,
+        duiFrenteUrl: w.duiFrenteUrl, duiReversoUrl: w.duiReversoUrl, rostroUrl: w.rostroUrl,
+        ...(w.metodoPago ? { metodoPago: w.metodoPago }
+                         : w.preferenciaPago?.metodo ? { metodoPago: w.preferenciaPago.metodo } : {}),
+      }, { merge: true });
+      await guardarPagoPrivado(w);
+      agregarHistorial('edicion', `Re-sincronizó datos de ${w.nombre||''} ${w.apellido||''}`, w.uid);
+      toast('Datos re-sincronizados');
+    } catch (e) {
+      console.error(e);
+      toast('Error: ' + e.message);
+    }
+  };
+
+  window.rechazar = async (id) => {
+    const w = todosWorkers.find(x => x.id === id);
+    if (!w) return;
+    if (getEstado(w) !== 'pendiente') { toast('Esta solicitud ya fue procesada'); return; }
+    await updateDoc(doc(db, 'solicitudesTrabajador', id), { estado: 'rechazado' });
+    w.estado = 'rechazado';
+    renderTrabajadores(); actualizarDashboard();
+    agregarHistorial('rechazo', `Rechazó a ${w.nombre||''} ${w.apellido||''}`, w.uid);
+    toast('Registro rechazado');
+  };
+
+  window.eliminarTrabajador = async (id) => {
+    if (!confirm('¿Eliminar esta solicitud? Esta acción no se puede deshacer.')) return;
+    try {
+      const w = todosWorkers.find(x => x.id === id);
+      if (!w) {
+        toast('Solicitud no encontrada');
+        return;
+      }
+      console.log('Eliminando solicitud:', id);
+      await deleteDoc(doc(db, 'solicitudesTrabajador', id));
+      todosWorkers = todosWorkers.filter(x => x.id !== id);
+      renderTrabajadores();
+      actualizarDashboard();
+      agregarHistorial('eliminacion', `Eliminó solicitud de ${w.nombre||''} ${w.apellido||''}`, w.uid);
+      toast('Solicitud eliminada correctamente');
+    } catch (error) {
+      console.error('Error al eliminar solicitud:', error);
+      toast('Error al eliminar: ' + error.message);
+    }
+  };
+
+function renderClientes() {
+    let clientes = [...todosClientes];
+    if (busqClientes) {
+      const q = busqClientes.toLowerCase();
+      clientes = clientes.filter(c => (c.nombre||'').toLowerCase().includes(q) || (c.email||'').toLowerCase().includes(q));
+    }
+    const tbody = document.getElementById('tabla-clientes');
+    if (clientes.length === 0) { tbody.innerHTML = `<tr><td colspan="5" style="text-align:center;padding:30px;color:var(--muted)">No se encontraron clientes.</td></tr>`; return; }
+    tbody.innerHTML = clientes.map(c => {
+      const serviciosSolicitados = c.serviciosSolicitados || 0; // TODO: conectar a colección real cuando la definas
+      const reportesCount = todosReportes.filter(r => r.contra === c.email || r.contra === `${c.nombre} ${c.apellido}`.trim()).length;
+      const activo = !c.suspendido;
+      return `
+      <tr>
+        <td><strong>${c.nombre||''} ${c.apellido||''}</strong></td>
+        <td style="text-align:center">${serviciosSolicitados}</td>
+        <td style="text-align:center;${reportesCount>0?'color:var(--danger);font-weight:600':'color:var(--muted)'}">${reportesCount}</td>
+        <td><span class="status-badge ${activo?'activo':'suspendido'}">${activo?' Activo':'Suspendido'}</span></td>
+        <td>
+          <div style="display:flex;gap:6px;flex-wrap:wrap">
+            <button class="btn-detail" onclick="verDetalleCliente('${c.id}')"> Ver</button>
+            <button class="btn-purple" onclick="mensajeACliente('${c.email||''}')"> Mensaje</button>
+            ${activo
+              ? `<button class="btn-reject" onclick="suspenderCliente('${c.id}')"> Suspender</button>`
+              : `<button class="btn-approve" onclick="activarCliente('${c.id}')"> Activar</button>`}
+          </div>
+        </td>
+      </tr>
+    `;}).join('');
+  }
+
+  window.mensajeACliente = (email) => {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.getElementById('mensajes').classList.add('active');
+    document.querySelectorAll('.sidebar-item').forEach(b => b.classList.remove('active'));
+    document.querySelector('.sidebar-item[onclick*="mensajes"]').classList.add('active');
+    document.getElementById('topbar-title').textContent = 'Mensajes';
+    document.getElementById('topbar-sub').textContent = 'Comunicación con usuarios';
+    document.getElementById('msg-destinatario').value = 'usuario';
+    document.getElementById('msg-usuario-container').style.display = 'block';
+    document.getElementById('msg-usuario-email').value = email;
+  };
+
+  window.setFilterClientes = (f, btn) => {
+    filtroClientes = f;
+    document.querySelectorAll('#clientes .filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderClientes();
+  };
+
+  window.buscarClientes = (v) => { busqClientes = v; renderClientes(); };
+
+  window.verDetalleCliente = (uid) => {
+    const c = todosClientes.find(x => x.id === uid); if (!c) return;
+    document.getElementById('modal-name').textContent = `${c.nombre||''} ${c.apellido||''}`.trim();
+    document.getElementById('modal-body').innerHTML = `
+      <div class="modal-row"><span class="lbl">Email</span><span class="val">${c.email||'—'}</span></div>
+      <div class="modal-row"><span class="lbl">Estado</span><span class="val">${c.suspendido?'Suspendido':'Activo'}</span></div>
+    `;
+    document.getElementById('modal-actions').innerHTML = `<button class="btn-detail" onclick="closeModal()">Cerrar</button>`;
+    document.getElementById('modal').classList.add('open');
+  };
+
+  window.suspenderCliente = async (uid) => {
+    if (!confirm('¿Suspender este cliente?')) return;
+    try {
+      console.log('Suspendiendo cliente:', uid);
+      await updateDoc(doc(db, 'usuarios', uid), { suspendido: true });
+      const c = todosClientes.find(x => x.id === uid);
+      if (c) c.suspendido = true;
+      renderClientes();
+      agregarHistorial('suspension', `Suspendió cliente ${uid}`, uid);
+      toast('Cliente suspendido correctamente');
+    } catch (error) {
+      console.error('Error al suspender cliente:', error);
+      toast('Error: ' + error.message);
+    }
+  };
+
+  window.activarCliente = async (uid) => {
+    try {
+      console.log('Activando cliente:', uid);
+      await updateDoc(doc(db, 'usuarios', uid), { suspendido: false });
+      const c = todosClientes.find(x => x.id === uid);
+      if (c) c.suspendido = false;
+      renderClientes();
+      toast('Cliente activado correctamente');
+    } catch (error) {
+      console.error('Error al activar cliente:', error);
+      toast('Error: ' + error.message);
+    }
+  };
+
+  window.eliminarCliente = async (uid) => {
+    if (!confirm('¿Eliminar este cliente? Esta acción no se puede deshacer.')) return;
+    try {
+      const c = todosClientes.find(x => x.id === uid);
+      if (!c) {
+        toast('Cliente no encontrado');
+        return;
+      }
+      console.log('Eliminando cliente:', uid);
+      await deleteDoc(doc(db, 'usuarios', uid));
+      todosClientes = todosClientes.filter(x => x.id !== uid);
+      renderClientes();
+      agregarHistorial('eliminacion', `Eliminó cliente ${c.nombre} ${c.apellido}`, uid);
+      toast('Cliente eliminado correctamente');
+    } catch (error) {
+      console.error('Error al eliminar cliente:', error);
+      toast('Error al eliminar: ' + error.message);
+    }
+  };
+
+  function renderReportes() {
+    let reportes = [...todosReportes];
+    if (filtroReportes !== 'todos') reportes = reportes.filter(r => r.estado === filtroReportes);
+    if (busqReportes) {
+      const q = busqReportes.toLowerCase();
+      reportes = reportes.filter(r => (r.reportante||'').toLowerCase().includes(q) || (r.contra||'').toLowerCase().includes(q));
+    }
+    const tbody = document.getElementById('tabla-reportes');
+    if (reportes.length === 0) { tbody.innerHTML = `<tr><td colspan="6" style="text-align:center;padding:30px;color:var(--muted)">No hay reportes.</td></tr>`; return; }
+    tbody.innerHTML = reportes.map(r => `
+      <tr>
+        <td>${r.tipo||'General'}</td>
+        <td>${r.reportante||'—'}</td>
+        <td>${r.contra||'—'}</td>
+        <td style="color:var(--muted);font-size:12px">${r.fecha ? new Date(r.fecha?.toDate?.()).toLocaleDateString('es-SV') : 'Reciente'}</td>
+        <td><span class="status-badge ${r.estado||'pendiente'}">${r.estado==='pendiente'?'Pendiente':r.estado==='en-revision'?'En revisión':'Resuelto'}</span></td>
+        <td>
+          <div style="display:flex;gap:6px">
+            <button class="btn-detail" onclick="verDetalleReporte('${r.id}')">Ver</button>
+            <button class="btn-edit"   onclick="cambiarEstadoReporte('${r.id}','en-revision')">Revisar</button>
+            <button class="btn-approve"onclick="resolverReporte('${r.id}')">Resolver</button>
+          </div>
+        </td>
+      </tr>
+    `).join('');
+  }
+
+  window.setFilterReportes = (f, btn) => {
+    filtroReportes = f;
+    document.querySelectorAll('#reportes .filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderReportes();
+  };
+
+  window.buscarReportes = (v) => { busqReportes = v; renderReportes(); };
+
+  window.verDetalleReporte = (rid) => {
+    const r = todosReportes.find(x => x.id === rid); if (!r) return;
+    document.getElementById('modal-name').textContent = `Reporte: ${r.tipo||'General'}`;
+    document.getElementById('modal-body').innerHTML = `
+      <div class="modal-row"><span class="lbl">Reportante</span><span class="val">${r.reportante||'—'}</span></div>
+      <div class="modal-row"><span class="lbl">Contra</span><span class="val">${r.contra||'—'}</span></div>
+      <div class="modal-row"><span class="lbl">Descripción</span><span class="val">${r.descripcion||'—'}</span></div>
+      <div class="modal-row"><span class="lbl">Estado</span><span class="val">${r.estado||'—'}</span></div>
+    `;
+    document.getElementById('modal-actions').innerHTML = `<button class="btn-detail" onclick="closeModal()">Cerrar</button>`;
+    document.getElementById('modal').classList.add('open');
+  };
+
+  window.cambiarEstadoReporte = async (rid, estado) => {
+    await updateDoc(doc(db, 'reportes', rid), { estado });
+    const r = todosReportes.find(x => x.id === rid); if (r) r.estado = estado;
+    renderReportes();
+    toast('Estado actualizado');
+  };
+
+  window.resolverReporte = async (rid) => {
+    await cambiarEstadoReporte(rid, 'resuelto');
+    agregarHistorial('moderacion', `Resolvió reporte ${rid}`, rid);
+    toast('Reporte resuelto');
+  };
+
+  // =========================================================================
+  // GESTIÓN DE SOLICITUDES DE EVIDENCIA
+  // =========================================================================
+  async function cargarSolicitudes() {
+    try {
+      const snap = await getDocs(collection(db, 'solicitudes'));
+      todosSolicitudes = [];
+      snap.forEach(d => todosSolicitudes.push({ id: d.id, ...d.data() }));
+      todosSolicitudes.sort((a, b) => (b.creadoEn?.seconds || 0) - (a.creadoEn?.seconds || 0));
+    } catch(e) {
+      console.warn('Error cargando solicitudes:', e);
+      todosSolicitudes = [];
+    }
+    renderSolicitudes();
+  }
+
+  function renderSolicitudes() {
+    let items = [...todosSolicitudes];
+    if (filtroSolicitudes === 'con_fotos') {
+      items = items.filter(s => Array.isArray(s.fotosProblema) && s.fotosProblema.length > 0);
+    } else if (filtroSolicitudes !== 'todas') {
+      items = items.filter(s => (s.estado || 'pendiente') === filtroSolicitudes);
+    }
+
+    if (busqSolicitudes) {
+      const q = busqSolicitudes.toLowerCase();
+      items = items.filter(s => {
+        const cNom = resolverNombre(s.clienteId).toLowerCase();
+        const tNom = resolverNombre(s.tecnicoId).toLowerCase();
+        const desc = (s.descripcion || '').toLowerCase();
+        const dir  = (s.direccion || '').toLowerCase();
+        return cNom.includes(q) || tNom.includes(q) || desc.includes(q) || dir.includes(q);
+      });
+    }
+
+    const tbody = document.getElementById('tabla-solicitudes');
+    if (!tbody) return;
+    if (items.length === 0) {
+      tbody.innerHTML = `<tr><td colspan="7" style="text-align:center;padding:30px;color:var(--muted)">No se encontraron solicitudes.</td></tr>`;
+      return;
+    }
+
+    tbody.innerHTML = items.map(s => {
+      const clienteNom = resolverNombre(s.clienteId);
+      const tecnicoNom = resolverNombre(s.tecnicoId);
+      const fechaHora  = `${s.fecha || '—'} ${s.hora || ''}`.trim() || 'No especificada';
+      const fotos      = Array.isArray(s.fotosProblema) ? s.fotosProblema : [];
+      const estado     = s.estado || 'pendiente';
+
+      let badgeClass = 'pendiente';
+      if (estado === 'aceptada' || estado === 'aprobado') badgeClass = 'aprobado';
+      else if (estado === 'completada' || estado === 'finalizada') badgeClass = 'activo';
+      else if (estado === 'cancelada' || estado === 'rechazado') badgeClass = 'rechazado';
+
+      let fotosHtml = '<span style="color:var(--muted);font-size:12px">Sin fotos</span>';
+      if (fotos.length > 0) {
+        fotosHtml = `
+          <div class="admin-fotos-grid" style="display:flex;gap:6px;align-items:center;">
+            ${fotos.slice(0, 3).map((fUrl, idx) => `
+              <img src="${fUrl}" alt="Evidencia ${idx+1}" class="admin-foto-thumb"
+                   title="Clic para ver en pantalla grande"
+                   style="width:38px;height:38px;border-radius:6px;object-fit:cover;cursor:pointer;border:1px solid var(--border);"
+                   onclick="verFotoGrande('${fUrl}', 'Foto de solicitud: ${clienteNom.replace(/'/g, "\\'")}')" />
+            `).join('')}
+            ${fotos.length > 3 ? `<span style="font-size:11px;font-weight:600;color:var(--accent);align-self:center;">+${fotos.length - 3}</span>` : ''}
+          </div>
+        `;
+      }
+
+      const descCorta = (s.descripcion || 'Sin descripción').length > 55
+        ? (s.descripcion || '').substring(0, 52) + '…'
+        : (s.descripcion || 'Sin descripción');
+
+      return `
+        <tr>
+          <td>
+            <div style="font-weight:600;color:var(--text)">${clienteNom}</div>
+            <div style="font-size:11px;color:var(--muted)">UID: ${(s.clienteId||'').substring(0,8)}…</div>
+          </td>
+          <td>
+            <div style="font-weight:600;color:var(--text)">${tecnicoNom}</div>
+            <div style="font-size:11px;color:var(--muted)">UID: ${(s.tecnicoId||'').substring(0,8)}…</div>
+          </td>
+          <td>
+            <div style="font-size:13px;color:var(--text)" title="${(s.descripcion||'').replace(/"/g, '&quot;')}">${descCorta}</div>
+            ${s.direccion ? `<div style="font-size:11px;color:var(--muted);margin-top:2px">📍 ${s.direccion.substring(0,40)}${s.direccion.length>40?'…':''}</div>` : ''}
+          </td>
+          <td style="font-size:12px;color:var(--muted);white-space:nowrap">${fechaHora}</td>
+          <td>${fotosHtml}</td>
+          <td><span class="status-badge ${badgeClass}">${estado}</span></td>
+          <td>
+            <button class="btn-detail" onclick="verDetalleSolicitud('${s.id}')">Ver detalle</button>
+          </td>
+        </tr>
+      `;
+    }).join('');
+  }
+
+  window.setFilterSolicitudes = (f, btn) => {
+    filtroSolicitudes = f;
+    document.querySelectorAll('#solicitudes .filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderSolicitudes();
+  };
+
+  window.buscarSolicitudes = (v) => {
+    busqSolicitudes = v;
+    renderSolicitudes();
+  };
+
+  window.verDetalleSolicitud = (id) => {
+    const s = todosSolicitudes.find(x => x.id === id);
+    if (!s) return;
+
+    const clienteNom = resolverNombre(s.clienteId);
+    const tecnicoNom = resolverNombre(s.tecnicoId);
+    const fotos = Array.isArray(s.fotosProblema) ? s.fotosProblema : [];
+
+    document.getElementById('modal-name').textContent = `Detalle de solicitud de servicio`;
+
+    let galeriaHtml = '';
+    if (fotos.length > 0) {
+      galeriaHtml = `
+        <div class="modal-row" style="flex-direction:column;align-items:stretch;gap:8px">
+          <span class="lbl" style="font-weight:600;color:var(--text)">📸 Fotos del problema (${fotos.length}) — Clic para ampliar:</span>
+          <div class="admin-modal-gallery">
+            ${fotos.map((url, idx) => `
+              <img src="${url}" alt="Foto ${idx+1}" class="admin-gallery-item"
+                   title="Clic para ampliar en alta resolución"
+                   onclick="verFotoGrande('${url}', 'Evidencia de ${clienteNom.replace(/'/g, "\\'")}')" />
+            `).join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    document.getElementById('modal-body').innerHTML = `
+      <div class="modal-row"><span class="lbl">Cliente</span><span class="val" style="font-weight:600;color:var(--accent)">${clienteNom}</span></div>
+      <div class="modal-row"><span class="lbl">Técnico</span><span class="val" style="font-weight:600;color:var(--text)">${tecnicoNom}</span></div>
+      <div class="modal-row"><span class="lbl">Fecha y hora</span><span class="val">${s.fecha || '—'} ${s.hora || ''}</span></div>
+      <div class="modal-row"><span class="lbl">Dirección</span><span class="val">${s.direccion || 'No especificada'}</span></div>
+      <div class="modal-row"><span class="lbl">Estado</span><span class="val"><span class="status-badge ${s.estado === 'aceptada' ? 'aprobado' : (s.estado === 'cancelada' ? 'rechazado' : 'pendiente')}">${s.estado || 'pendiente'}</span></span></div>
+      <div class="modal-row" style="flex-direction:column;align-items:stretch">
+        <span class="lbl" style="margin-bottom:4px">Descripción del problema:</span>
+        <div style="font-size:13px;color:var(--text);background:var(--bg);padding:10px;border-radius:6px;border:1px solid var(--border);white-space:pre-wrap">${s.descripcion || 'Sin descripción'}</div>
+      </div>
+      ${galeriaHtml}
+    `;
+
+    document.getElementById('modal-actions').innerHTML = `
+      <button class="btn-detail" onclick="closeModal()">Cerrar</button>
+    `;
+    document.getElementById('modal').classList.add('open');
+  };
+
+  // =========================================================================
+  // GESTIÓN DE CHATS Y FOTOS ENTRE USUARIOS
+  // =========================================================================
+  async function cargarChats() {
+    try {
+      const snap = await getDocs(collection(db, 'chats'));
+      todosChats = [];
+      snap.forEach(d => todosChats.push({ id: d.id, ...d.data() }));
+      todosChats.sort((a, b) => (b.ultimaFecha?.seconds || 0) - (a.ultimaFecha?.seconds || 0));
+    } catch(e) {
+      console.warn('Error cargando chats:', e);
+      todosChats = [];
+    }
+    renderChats();
+  }
+
+  function renderChats() {
+    const tbody = document.getElementById('tabla-chats');
+    if (!tbody) return;
+    let chats = [...todosChats];
+    if (busqChats) {
+      const q = busqChats.toLowerCase();
+      chats = chats.filter(c => {
+        const nombres = (c.participantes || []).map(p => resolverNombre(p).toLowerCase()).join(' ');
+        const ult = (c.ultimoMensaje || '').toLowerCase();
+        return nombres.includes(q) || ult.includes(q);
+      });
+    }
+
+    if (chats.length === 0) {
+      tbody.innerHTML = `<tr><td colspan="5" style="text-align:center;padding:30px;color:var(--muted)">No hay conversaciones registradas.</td></tr>`;
+      return;
+    }
+
+    tbody.innerHTML = chats.map(c => {
+      const part1 = resolverNombre((c.participantes || [])[0]);
+      const part2 = resolverNombre((c.participantes || [])[1]);
+      const fecha = c.ultimaFecha?.seconds ? new Date(c.ultimaFecha.seconds * 1000).toLocaleDateString('es-SV', { hour: '2-digit', minute: '2-digit' }) : '—';
+      const ultMsg = c.ultimoMensaje || 'Conversación iniciada';
+
+      return `
+        <tr>
+          <td>
+            <div style="font-weight:600;color:var(--text)">${part1} ↔ ${part2}</div>
+            <div style="font-size:11px;color:var(--muted)">ID: ${c.id.substring(0, 10)}…</div>
+          </td>
+          <td style="font-size:13px;color:var(--text)">${ultMsg.substring(0, 50)}${ultMsg.length > 50 ? '…' : ''}</td>
+          <td style="font-size:12px;color:var(--muted)">${fecha}</td>
+          <td>
+            <span style="font-size:12px;color:var(--accent)">💬 Mensajes / Fotos</span>
+          </td>
+          <td>
+            <button class="btn-detail" onclick="verDetalleChat('${c.id}')">Ver chat y fotos</button>
+          </td>
+        </tr>
+      `;
+    }).join('');
+  }
+
+  window.buscarChats = (v) => {
+    busqChats = v;
+    renderChats();
+  };
+
+  window.switchSubTabMsg = (tab) => {
+    subtabMsgActual = tab;
+    const btnAdmin = document.getElementById('btn-tab-msg-admin');
+    const btnChats = document.getElementById('btn-tab-msg-chats');
+    const secAdmin = document.getElementById('subtab-msg-admin');
+    const secChats = document.getElementById('subtab-msg-chats');
+
+    if (tab === 'admin') {
+      btnAdmin.classList.add('active');
+      btnChats.classList.remove('active');
+      secAdmin.style.display = 'block';
+      secChats.style.display = 'none';
+    } else {
+      btnChats.classList.add('active');
+      btnAdmin.classList.remove('active');
+      secAdmin.style.display = 'none';
+      secChats.style.display = 'block';
+    }
+  };
+
+  window.verDetalleChat = async (chatId) => {
+    const c = todosChats.find(x => x.id === chatId);
+    const p1 = resolverNombre((c?.participantes || [])[0]);
+    const p2 = resolverNombre((c?.participantes || [])[1]);
+
+    const modalChat = document.getElementById('modal-chat');
+    const modalBody = document.getElementById('modal-chat-body');
+    const modalTitle = document.getElementById('modal-chat-titulo');
+
+    modalTitle.textContent = `Chat: ${p1} con ${p2}`;
+    modalBody.innerHTML = `<div style="text-align:center;padding:24px;color:var(--muted)">Cargando mensajes del chat…</div>`;
+    modalChat.classList.add('open');
+
+    try {
+      const snap = await getDocs(query(collection(db, 'chats', chatId, 'mensajes'), orderBy('timestamp', 'asc')));
+      if (snap.empty) {
+        modalBody.innerHTML = `<div style="text-align:center;padding:24px;color:var(--muted)">Esta conversación aún no tiene mensajes.</div>`;
+        return;
+      }
+
+      let htmlChat = '';
+      snap.forEach(d => {
+        const m = d.data();
+        const emisorNom = resolverNombre(m.emisor);
+        const fechaHora = m.timestamp?.seconds ? new Date(m.timestamp.seconds * 1000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : '';
+        const esFoto = m.tipo === 'imagen' || Boolean(m.imagenUrl);
+
+        htmlChat += `
+          <div style="background:#161b22;border:1px solid #30363d;border-radius:8px;padding:10px 12px;">
+            <div style="display:flex;justify-content:space-between;margin-bottom:6px;font-size:11px;">
+              <strong style="color:var(--accent)">${emisorNom}</strong>
+              <span style="color:var(--muted)">${fechaHora}</span>
+            </div>
+            ${esFoto ? `
+              <div style="margin-top:6px;">
+                <img src="${m.imagenUrl}" alt="Foto enviada" style="max-width:240px;max-height:180px;border-radius:8px;object-fit:cover;cursor:pointer;border:1px solid #30363d"
+                     onclick="verFotoGrande('${m.imagenUrl}', 'Foto enviada por ${emisorNom.replace(/'/g, "\\'")}')"
+                     title="Clic para ampliar en pantalla completa" />
+                <div style="font-size:10px;color:var(--muted);margin-top:2px">📷 Clic en la foto para ampliar</div>
+              </div>
+            ` : ''}
+            ${m.texto ? `<div style="font-size:13px;color:var(--text);white-space:pre-wrap;margin-top:${esFoto?'6px':'0'}">${m.texto}</div>` : ''}
+          </div>
+        `;
+      });
+      modalBody.innerHTML = htmlChat;
+    } catch(e) {
+      console.error('Error al cargar mensajes del chat:', e);
+      modalBody.innerHTML = `<div style="text-align:center;padding:24px;color:var(--danger)">Error al cargar mensajes: ${e.message}</div>`;
+    }
+  };
+
+  // Lightbox modal helpers
+  window.verFotoGrande = (url, titulo) => {
+    if (!url) return;
+    const modal = document.getElementById('modal-foto');
+    const img = document.getElementById('modal-foto-img');
+    const titleEl = document.getElementById('modal-foto-titulo');
+    const linkEl = document.getElementById('modal-foto-link');
+
+    img.src = url;
+    titleEl.textContent = titulo || 'Previsualización de imagen';
+    linkEl.href = url;
+    modal.classList.add('open');
+  };
+
+  window.cerrarFotoModal = window.closeFotoModal = () => {
+    const modal = document.getElementById('modal-foto');
+    if (modal) modal.classList.remove('open');
+    const img = document.getElementById('modal-foto-img');
+    if (img) img.src = '';
+  };
+
+  window.cerrarChatModal = window.closeChatModal = () => {
+    const modal = document.getElementById('modal-chat');
+    if (modal) modal.classList.remove('open');
+  };
+
+  function renderHistorial() {
+    let hist = [...todosHistorial];
+    const tipo  = document.getElementById('filter-historial-tipo').value;
+    const fecha = document.getElementById('filter-historial-fecha').value;
+    if (tipo)  hist = hist.filter(h => h.tipo === tipo);
+    if (fecha) hist = hist.filter(h => (h.fecha||'').includes(fecha));
+    if (busqHistorial) { const q = busqHistorial.toLowerCase(); hist = hist.filter(h => (h.descripcion||'').toLowerCase().includes(q)); }
+
+    const lista = document.getElementById('lista-historial');
+    if (hist.length === 0) { lista.innerHTML = `<div class="empty-state"><div class="icon">📜</div>Sin registros de historial.</div>`; return; }
+    lista.innerHTML = [...hist].reverse().map(h => `
+      <div class="historial-item">
+        <div class="historial-header">
+          <span class="historial-tipo">${h.tipo||'—'}</span>
+          <span class="historial-fecha">${h.fecha||'Reciente'}</span>
+        </div>
+        <div class="historial-desc">${h.descripcion||'—'}</div>
+      </div>
+    `).join('');
+  }
+
+  window.buscarHistorial = (v) => { busqHistorial = v; renderHistorial(); };
+
+  async function agregarHistorial(tipo, descripcion, uid) {
+    const fecha = new Date().toISOString().split('T')[0];
+    try {
+      await setDoc(doc(collection(db, 'historial')), { tipo, descripcion, uid, fecha, timestamp: new Date() });
+    } catch(e) {}
+    todosHistorial.push({ tipo, descripcion, uid, fecha });
+  }
+
+  window.toggleMsgUsuario = () => {
+    document.getElementById('msg-usuario-container').style.display =
+      document.getElementById('msg-destinatario').value === 'usuario' ? 'block' : 'none';
+  };
+
+  function renderMensajes() {
+    const tbody = document.getElementById('tabla-mensajes');
+    if (todosMensajes.length === 0) { tbody.innerHTML = `<tr><td colspan="4" style="text-align:center;padding:30px;color:var(--muted)">Sin mensajes enviados.</td></tr>`; return; }
+    tbody.innerHTML = todosMensajes.map(m => `
+      <tr>
+        <td>${m.destinatario||'—'}</td>
+        <td>${m.asunto||'—'}</td>
+        <td style="color:var(--muted);font-size:12px">${m.fecha||'—'}</td>
+        <td>
+          <div style="display:flex;gap:6px">
+            <button class="btn-detail" onclick="verMensaje('${m.id}')">Ver</button>
+            <button class="btn-delete" onclick="eliminarMensaje('${m.id}')">Eliminar</button>
+          </div>
+        </td>
+      </tr>
+    `).join('');
+  }
+
+  window.enviarMensaje = async () => {
+    const destinatario = document.getElementById('msg-destinatario').value;
+    const asunto       = document.getElementById('msg-asunto').value.trim();
+    const contenido    = document.getElementById('msg-contenido').value.trim();
+    if (!destinatario || !asunto || !contenido) { toast('Completa todos los campos'); return; }
+    const fecha = new Date().toISOString().split('T')[0];
+    await setDoc(doc(collection(db, 'mensajes')), { destinatario, asunto, contenido, fecha });
+    document.getElementById('msg-destinatario').value = '';
+    document.getElementById('msg-asunto').value = '';
+    document.getElementById('msg-contenido').value = '';
+    document.getElementById('msg-usuario-container').style.display = 'none';
+    await cargarMensajes();
+    actualizarDashboard();
+    agregarHistorial('mensaje', `Envió mensaje: ${asunto}`, 'admin');
+    toast('Mensaje enviado');
+  };
+
+  window.verMensaje = (mid) => {
+    const m = todosMensajes.find(x => x.id === mid); if (!m) return;
+    document.getElementById('modal-name').textContent = m.asunto||'Mensaje';
+    document.getElementById('modal-body').innerHTML = `
+      <div class="modal-row"><span class="lbl">Destinatario</span><span class="val">${m.destinatario}</span></div>
+      <div class="modal-row"><span class="lbl">Fecha</span><span class="val">${m.fecha||'—'}</span></div>
+      <div class="modal-row"><span class="lbl">Contenido</span><span class="val">${m.contenido}</span></div>
+    `;
+    document.getElementById('modal-actions').innerHTML = `<button class="btn-detail" onclick="closeModal()">Cerrar</button>`;
+    document.getElementById('modal').classList.add('open');
+  };
+
+  window.eliminarMensaje = async (mid) => {
+    if (!confirm('¿Eliminar mensaje?')) return;
+    try {
+      console.log('Eliminando mensaje:', mid);
+      await deleteDoc(doc(db, 'mensajes', mid));
+      todosMensajes = todosMensajes.filter(x => x.id !== mid);
+      renderMensajes();
+      toast('Mensaje eliminado correctamente');
+    } catch (error) {
+      console.error('Error al eliminar mensaje:', error);
+      toast('Error al eliminar: ' + error.message);
+    }
+  };
+
+  window.guardarConfiguracion = () => {
+    localStorage.setItem('fixnear-config', JSON.stringify({
+      comision: document.getElementById('config-comision').value,
+      precioMinimo: document.getElementById('config-precio-minimo').value,
+      precioMaximo: document.getElementById('config-precio-maximo').value
+    }));
+    toast('Configuración guardada');
+  };
+
+  window.agregarServicio = () => {
+    const s = document.getElementById('nuevo-servicio').value.trim();
+    if (!s) return;
+    const div = document.createElement('div');
+    div.className = 'config-row';
+    div.innerHTML = `<label>${s}</label><button class="btn-delete" onclick="this.parentElement.remove()">Eliminar</button>`;
+    document.getElementById('lista-servicios').appendChild(div);
+    document.getElementById('nuevo-servicio').value = '';
+    toast('Servicio agregado');
+  };
+
+  window.removeServicio = (s) => { toast(`Servicio eliminado`); };
+
+  window.exportarDatos = () => {
+    let csv = 'Nombre,Email,Oficio,Estado,Experiencia,Precio/hora\n';
+    todosWorkers.forEach(w => {
+      csv += `"${w.nombre||''} ${w.apellido||''}","${w.email||''}","${w.oficio||''}","${getEstado(w)}","${w.experiencia||''}","${w.precioPorHora||''}"\n`;
+    });
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'fixnear-trabajadores.csv';
+    a.click();
+    toast('Datos exportados');
+  };
+
+  const TAB_TITLES = {
+    dashboard: ['Dashboard', 'Resumen general del sistema'],
+    trabajadores: ['Trabajadores', 'Gestiona los perfiles de trabajadores'],
+    clientes: ['Clientes', 'Supervisa los clientes registrados'],
+    solicitudes: ['Solicitudes', 'Supervisa solicitudes de servicio, evidencias y fotos del problema'],
+    reportes: ['Reportes', 'Gestiona reportes y denuncias'],
+    reportesCliente: ['Reportes de clientes', 'Reportes enviados por clientes sobre trabajadores'],
+    reportesTrabajador: ['Reportes de trabajadores', 'Reportes enviados por trabajadores sobre clientes'],
+    historial: ['Historial', 'Registro de cambios y auditoría'],
+    mensajes: ['Mensajes y Chats', 'Avisos del administrador y conversaciones con fotos entre usuarios'],
+    configuracion: ['Configuración', 'Ajustes generales del sistema'],
+  };
+
+  const TAB_TITLES_EN = {
+    dashboard: ['Dashboard', 'System overview and analytics'],
+    trabajadores: ['Workers', 'Manage worker profiles and approvals'],
+    clientes: ['Clients', 'Monitor registered client accounts'],
+    solicitudes: ['Requests & Photos', 'Inspect service requests, problem descriptions and photo evidence'],
+    reportes: ['Reports', 'Review disputes and moderation reports'],
+    reportesCliente: ['Client reports', 'Reports submitted by clients against workers'],
+    reportesTrabajador: ['Worker reports', 'Reports submitted by workers against clients'],
+    historial: ['Audit History', 'System activity and audit log'],
+    mensajes: ['Messages & Chats', 'Admin announcements and user chat inspection with photos'],
+    configuracion: ['Settings', 'General system and platform settings'],
+  };
+
+  window.switchTab = (tab, btn) => {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.getElementById(tab).classList.add('active');
+    document.querySelectorAll('.sidebar-item').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const isEn = window.I18N?.lang === 'en';
+    const [title, sub] = (isEn ? TAB_TITLES_EN[tab] : TAB_TITLES[tab]) || TAB_TITLES[tab] || ['', ''];
+    document.getElementById('topbar-title').textContent = title;
+    document.getElementById('topbar-sub').textContent = sub;
+  };
+
+  window.closeModal = () => document.getElementById('modal').classList.remove('open');
+
+  function toast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 3000);
+  }
+
+  document.getElementById('pass-input').addEventListener('keydown', e => { if (e.key === 'Enter') window.doLogin(); });
+</script>
+</body>
+</html>
